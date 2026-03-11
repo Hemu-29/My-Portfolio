@@ -3,69 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
+    <title>Coming Soon | Hemanth Ande</title>
+    <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Model Viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <style>
+        :root {
+            --bg-color: #050505;
+            --text-primary: #e0e0e0;
+            --accent-color: #ff004f;
+            --accent-glow: rgba(255, 0, 79, 0.6);
+            --cyan-color: #02a9ea;
+            --glass-bg: rgba(20, 20, 20, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
 
-        body {
-            font-family: "Poppins", sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Outfit", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('assets/pngtree-office-essentials-technology-and-gadgets-illustration-featuring-laptop-printer-camera-tablet-image_3748458.jpg'); /* Tech-related background */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            overflow: hidden;
+            position: relative;
         }
-        .overlay {
+
+        /* 3D Background */
+        .model-background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+            z-index: 0;
+            opacity: 0.6;
         }
-        .box {
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            outline: none;
+        }
+
+        /* Glass Panel */
+        .soon-box {
             position: relative;
-            background-color: #ffffff; /* Transparent white */
-            padding: 40px 40px;
-            width: 300px;
-            height: 300px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            font-size: 28px;
+            z-index: 10;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 4rem;
             text-align: center;
-            color: #333;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(2, 169, 234, 0.2);
+            max-width: 600px;
+            width: 90%;
+            animation: float 6s ease-in-out infinite;
         }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
         h1 {
-            color: #04bdeb; /* Accent color */
-            font-size: 32px;
-            margin-bottom: 10px;
+            color: var(--cyan-color);
+            font-size: 3rem;
+            margin-bottom: 1rem;
             font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(2, 169, 234, 0.5);
         }
-        span{
-            color: black;
+
+        p {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
         }
-        
+
+        span.highlight {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--text-primary);
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-color);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        /* CRT Scanline effect */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 6px 100%;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0.3;
+        }
     </style>
 </head>
 <body>
-    <div class="overlay"></div>
-    <div class="box">
-        <h1>WILL BE AVAILABLE SOON !! <br> <span>Please check again in few days</span></h1>
-       
+    <div class="scanlines"></div>
 
+    <div class="model-background">
+        <!-- Abstract/Sci-fi Model (e.g. damaged helmet or artifact) -->
+        <model-viewer 
+          src="https://modelviewer.dev/shared-assets/models/glTF-Sample-Assets/Models/DamagedHelmet/glTF/DamagedHelmet.gltf" 
+          auto-rotate 
+          rotation-per-second="10deg"
+          camera-controls 
+          disable-zoom 
+          shadow-intensity="2" 
+          exposure="1.0"
+          interaction-prompt="none">
+        </model-viewer>
+    </div>
+
+    <div class="soon-box">
+        <h1>Coming <span class="highlight">Soon</span></h1>
+        <p>This module is currently initializing.<br>Please check back in a few days when the deployment is complete.</p>
+        <a href="index.html" class="back-btn">Return to Base</a>
     </div>
 </body>
 </html>

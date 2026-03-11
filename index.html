@@ -1,32 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Portfolio</title>
+  <title>Hemanth Ande | AI & Full Stack</title>
+
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="mediaqueries.css" />
+
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Typed.js -->
   <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+  <!-- Three.js for Premium 3D Abstract Background -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 </head>
 
 <body>
-  <nav id="desktop-nav">
-    <div class="logo">Hemanth <span>Ande</span>.</div>
+  <!-- Ambient Gradient Background -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- 3D Canvas -->
+  <div id="canvas-container"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; opacity: 0.6;">
+  </div>
+
+  <!-- Sleek Navigation -->
+  <nav id="desktop-nav" class="glass-nav">
+    <div class="logo">Hemanth<span class="gradient-text">Ande</span></div>
     <div>
       <ul class="nav-links">
-        <li><a class="active" href="#desktop-nav">Home</a></li>
+        <li><a href="#home" class="active">Home</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#experience">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Work</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
-  <nav id="hamburger-nav">
-    <div class="logo">Hemanth <span>Ande.</span></div>
+
+  <nav id="hamburger-nav" class="glass-nav">
+    <div class="logo">Hemanth<span class="gradient-text">.</span></div>
     <div class="hamburger-menu">
       <div class="hamburger-icon" onclick="toggleMenu()">
         <span></span>
@@ -34,342 +59,442 @@
         <span></span>
       </div>
       <div class="menu-links">
+        <li><a href="#home" onclick="toggleMenu()">Home</a></li>
         <li><a href="#about" onclick="toggleMenu()">About</a></li>
-        <li><a href="#experience" onclick="toggleMenu()">Skills</a></li>
-        <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+        <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+        <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
+        <li><a href="#projects" onclick="toggleMenu()">Work</a></li>
         <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
       </div>
     </div>
   </nav>
-  <section id="profile">
-    <div class="section__text">
-      <!-- <p class="section__text__p1">Hi, I'm</p> -->
-      <h1 class="title">Hi, I'm <span>Hemanth</span></h1>
-      <h1 class="title">From India</h1>
-      <p class="section__text__p2">
-        A <span class="typed-text"> Frontend Developer</span>
-      </p>
-      <div class="btn-container">
-        <button class="btn btn-color-2" onclick="window.open('assets/HemanthAnde_Resume.pdf')">
-          Download CV
-        </button>
-        <button class="btn btn-color-1" onclick="location.href = './#contact'">
-          Contact Info
-        </button>
-      </div>
-      <div id="socials-container">
-        <img src="assets/174857.png" alt="My LinkedIn profile" class="icon" onclick="
-              location.href =
-                'https://www.linkedin.com/in/hemanth-ande-0265a2330/'
-            " />
-        <img src="./assets/github.png" alt="My Github profile" class="icon"
-          onclick="location.href = 'https://github.com/Hemu-29'" />
-        <img src="assets/Gmail_icon_(2020).svg.png" alt="My Gmail ID" class="icon" onclick="
-              location.href =
-                'https://mail.google.com/mail/?view=cm&fs=1&to=andehemanth24@gmail.com'
-            " />
-      </div>
-    </div>
-    <div class="section__pic-container">
-      <img src="assets/cropped_image.png" alt="Heamnth Ande profile picture" />
-    </div>
-  </section>
-  <section id="about">
-    <img src="assets/arrow - Copy.png" alt="Arrow icon" class="icon arrow1"
-      onclick="location.href = './#desktop-nav'" />
-    <p class="section__text__p1">Get To Know More</p>
-    <h1 class="title">About <span>Me</span></h1>
-    <div class="section-container">
-      <div class="section__pic">
-        <img src="assets/BCK03996-01.jpg" alt="Profile picture" class="about-pic" />
-      </div>
-      <div class="text-container">
-        <p>
-          Hi, I'm <strong>Hemanth Ande</strong>, a Full Stack Developer and
-          CSE (AI&ML) student passionate about architecting end-to-end
-          solutions that move from concept to production-level deployment.
-          <br /><br />
-          My track record features a suite of live applications, including an
-          official
-          <strong>results management platform</strong> serving 2,500+ students
-          and multiple automated institutional portals that have reduced
-          administrative workloads by 80%. I bridge the gap between
-          <strong>Deep Learning research</strong> (IIT Guwahati) and
-          <strong>network automation</strong> (HAL) to deliver software that
-          is both technically sophisticated and practically impactful.
-          <br /><br />
-          I am constantly exploring emerging technologies like multimodal AI
-          and responsive web design to solve real-world problems. Let's
-          connect and build something meaningful!
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-section">
+      <div class="hero-content">
+        <!-- <div class="badge-pill fade-in-up delay-1">
+          <span class="dot"></span> Open to new opportunities
+        </div> -->
+        <h1 class="hero-title fade-in-up delay-2">
+          Engineering the Future with <br>
+          <span class="gradient-text">AI & Full Stack</span>
+        </h1>
+        <p class="hero-subtitle fade-in-up delay-3">
+          I am a Software Developer crafting intelligent, scalable, and beautifully designed digital experiences.
+          Currently focusing on <br> <span class="typed-text gradient-text"></span>
         </p>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img src="./assets/experience.png" alt="Experience icon" class="icon" />
-              <h3>Experience</h3>
 
-              <div class="experience-item">
-                <strong>Hindustan Aeronautics Limited (HAL)</strong>
+        <div class="btn-group fade-in-up delay-4">
+          <button class="btn btn-primary" onclick="window.open('assets/HemanthAnde_Resume.pdf')">Download
+            Resume</button>
+          <button class="btn btn-outline" onclick="location.href='#projects'">Explore Work</button>
+        </div>
 
-                <p>05/2025 – 07/2025</p>
+        <div class="social-icons fade-in-up delay-5">
+          <a href="https://github.com/Hemu-29" target="_blank" class="social-btn" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+              </path>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/hemanth-ande-0265a2330/" target="_blank" class="social-btn"
+            aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="mailto:andehemanth24@gmail.com" class="social-btn" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
 
-              </div>
+    <!-- ABOUT SECTION -->
+    <section id="about" class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">About Me</h2>
+        <div class="title-line"></div>
+      </div>
 
-              <div class="experience-item">
-                <strong>IIT Guwahati</strong>
-                <p>05/2024 – 07/2024</p>
-              </div>
+      <div class="about-grid">
+        <div class="glass-card p-4">
+          <p class="text-large text-gradient-light mb-2">
+            Bridging the gap between cutting-edge AI research and robust engineering.
+          </p>
+          <p class="text-muted mb-2">
+            Full Stack Developer and CSE (AI&ML) student with a passion for architecting end-to-end solutions that move
+            from concept to production-level deployment.
+          </p>
+          <p class="text-muted mb-2">
+            My track record features a suite of live Front End and Back End applications—including an official results
+            management platform serving 2,500+ students and multiple automated institutional portals that reduced
+            administrative workloads by 80%.
+          </p>
+          <p class="text-muted">
+            I leverage advanced problem-solving skills to bridge the gap between Deep Learning research at IIT Guwahati
+            and network automation at HAL, delivering software that is both technically sophisticated and practically
+            impactful.
+          </p>
+        </div>
 
-              <p>
-                <a href="#contact">
-                  Open for Work
-                  <img class="icon-img" src="assets/share_arrow_send_redirect_shortcut-512.webp" alt="Click" />
-                </a>
-              </p>
+        <div class="stats-grid">
+          <div class="glass-card stat-card">
+            <h3 class="stat-number gradient-text">2.5K+</h3>
+            <p class="stat-desc">Students Served</p>
+          </div>
+          <div class="glass-card stat-card">
+            <h3 class="stat-number gradient-text">80%</h3>
+            <p class="stat-desc">Admin Load Cut</p>
+          </div>
+          <div class="glass-card stat-card">
+            <h3 class="stat-number gradient-text">AI/ML</h3>
+            <p class="stat-desc">Core Research Focus</p>
+          </div>
+          <div class="glass-card stat-card">
+            <h3 class="stat-number gradient-text">HAL</h3>
+            <p class="stat-desc">Industrial Validations</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Experience</h2>
+        <div class="title-line"></div>
+      </div>
+
+      <div class="timeline">
+        <!-- Experience 1 -->
+        <div class="timeline-item glass-card p-4">
+          <div class="timeline-header flex-between mb-1">
+            <h3 class="timeline-title">Lead Full Stack Developer</h3>
+            <span class="timeline-date">Sep 2024 – Present</span>
+          </div>
+          <h4 class="timeline-company gradient-text mb-2">DRK Group of Institutions</h4>
+          <ul class="styled-list text-muted">
+            <li><strong>Institutional Digital Transformation:</strong> Independently architected and deployed a suite of
+              production-level applications that modernized academic workflows and served a user base of 2,500+
+              students.</li>
+            <li><strong>Official Results Management System:</strong> Engineered a dynamic PHP/MySQL platform tailored to
+              JNTUH regulations that parses complex Excel data to map student profiles and results.</li>
+            <li><strong>Administrative Impact:</strong> Reduced institutional administrative workloads by 80% and
+              decreased manual paperwork by 50% through automated digital pipelines.</li>
+            <li><strong>Faculty Portal (Live Deployment):</strong> Developed a Flutter mobile ecosystem featuring
+              multi-level approval pipelines for gate passes and leaves, integrated with real-time attendance analytics.
+            </li>
+            <li><strong>Student Portal (Live Deployment):</strong> Designed and launched a high-performance mobile hub
+              using Flutter and RESTful APIs providing students with 24/7 access to academic resources, personalized
+              schedules, and attendance tracking.</li>
+            <li><strong>Technical Architecture:</strong> Leveraged SQLite for offline data persistence and optimized
+              backend logic to handle regular/supplementary exam updates and digital gate pass automation.</li>
+          </ul>
+        </div>
+
+        <!-- Experience 2 -->
+        <div class="timeline-item glass-card p-4">
+          <div class="timeline-header flex-between mb-1">
+            <h3 class="timeline-title">Project Intern</h3>
+            <span class="timeline-date">May 2025 – Jul 2025</span>
+          </div>
+          <h4 class="timeline-company gradient-text mb-2">Hindustan Aeronautics Limited (HAL)</h4>
+          <ul class="styled-list text-muted">
+            <li>Developed and deployed an automated LAN monitoring system to secure network integrity during off-hours.
+            </li>
+            <li>Engineered a C# (.NET) application leveraging PowerShell to scan for active IP/MAC addresses and
+              unauthorized shared folders.</li>
+            <li>Designed a secure logging pipeline to an Oracle database for real-time analysis.</li>
+            <li>Provided real-time security insights through a custom web dashboard, which was successfully adopted and
+              validated in a live lab environment.</li>
+          </ul>
+        </div>
+
+        <!-- Experience 3 -->
+        <div class="timeline-item glass-card p-4">
+          <div class="timeline-header flex-between mb-1">
+            <h3 class="timeline-title">Intern</h3>
+            <span class="timeline-date">May 2024 – Jul 2024</span>
+          </div>
+          <h4 class="timeline-company gradient-text mb-2">Indian Institute of Technology, Guwahati</h4>
+          <ul class="styled-list text-muted">
+            <li>Architected an offline virtual assistant utilizing Deep Learning for speech-to-text processing, ensuring
+              privacy and functionality without an internet connection.</li>
+            <li>Trained a speech-to-text model on the LJ Speech Dataset to achieve high-accuracy command recognition.
+            </li>
+            <li>Integrated Python-based system automation within VS Code, enabling voice-controlled file handling and
+              system operations.</li>
+            <li>Improved developer accessibility by supporting hybrid voice and text inputs for natural language
+              interaction.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS OVERVIEW -->
+    <section id="skills" class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Technical Expertise</h2>
+        <div class="title-line"></div>
+      </div>
+
+      <div class="skills-grid">
+        <div class="glass-card p-4">
+          <h3 class="mb-2 gradient-text">Frontend</h3>
+          <div class="badge-container left-align">
+            <span class="skill-badge">JavaScript</span>
+            <span class="skill-badge">HTML5</span>
+            <span class="skill-badge">CSS3</span>
+            <span class="skill-badge">Flutter (Web & Mobile)</span>
+          </div>
+        </div>
+
+        <div class="glass-card p-4">
+          <h3 class="mb-2 gradient-text">Backend & DB</h3>
+          <div class="badge-container left-align">
+            <span class="skill-badge">PHP</span>
+            <span class="skill-badge">C# (.NET)</span>
+            <span class="skill-badge">MySQL</span>
+            <span class="skill-badge">Oracle</span>
+            <span class="skill-badge">SQLite</span>
+            <span class="skill-badge">RESTful APIs</span>
+          </div>
+        </div>
+
+        <div class="glass-card p-4">
+          <h3 class="mb-2 gradient-text">AI & Deep Learning</h3>
+          <div class="badge-container left-align">
+            <span class="skill-badge">PyTorch</span>
+            <span class="skill-badge">YOLOv8</span>
+            <span class="skill-badge">Computer Vision</span>
+            <span class="skill-badge">OpenCV</span>
+            <span class="skill-badge">Faster R-CNN</span>
+            <span class="skill-badge">Speech-to-Text</span>
+          </div>
+        </div>
+
+        <div class="glass-card p-4">
+          <h3 class="mb-2 gradient-text">Languages & Tooling</h3>
+          <div class="badge-container left-align">
+            <span class="skill-badge">Python</span>
+            <span class="skill-badge">Java</span>
+            <span class="skill-badge">Dart</span>
+            <span class="skill-badge">C</span>
+            <span class="skill-badge">C#</span>
+            <span class="skill-badge">Git</span>
+            <span class="skill-badge">VS Code</span>
+            <span class="skill-badge">Android Studio</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Selected Works</h2>
+        <div class="title-line"></div>
+      </div>
+
+      <div class="work-grid">
+        <!-- Project 1 -->
+        <div class="work-card glass-card">
+          <div class="work-content p-4">
+            <div class="work-meta mb-1">
+              <span class="status-pill active">LIVE</span>
+              <span class="work-type">AI & Vision R&D</span>
             </div>
-            <div class="details-container edu">
-              <img src="./assets/education.png" alt="Education icon" class="icon" />
-              <h3>Education</h3>
-              <p>
-                <span>2022-Present</span> <br />B-Tech at DRK Institue of
-                Science and Technology<br /><span>2020-2022</span><br />Sri
-                Chaitanya Educational Institutions <br /><span>2022</span>
-                <br />Rosary High School
-              </p>
+            <h3 class="work-title mb-1">Multimodal AI System for Road Safety & Traffic Intelligence</h3>
+            <p class="work-desc text-muted mb-2">
+              Engineered an advanced AI system for real-time traffic monitoring by augmenting the YOLO framework with a
+              ResNet-50 backbone for deep feature extraction. Integrated a CBAM attention mechanism to achieve superior
+              detection accuracy for small or overlapping objects like helmets and number plates. Developed a unified
+              pipeline to detect helmetless riding, triple riding, and wrong-way driving alongside an ANPR dashboard.
+            </p>
+            <div class="tech-stack mb-3">
+              <span>PyTorch</span>
+              <span>YOLOv8</span>
+              <span>Computer Vision</span>
+              <span>CBAM</span>
+              <span>ResNet-50</span>
+              <span>OpenCV</span>
+              <span>Python</span>
+            </div>
+            <div class="work-links">
+              <a href="soon.html" class="link-btn">View Details <svg viewBox="0 0 24 24" width="16" height="16"
+                  fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg></a>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href = './#experience'" />
-  </section>
-  <section id="experience">
-    <img src="assets/arrow - Copy.png" alt="Arrow icon" class="icon arrow1" onclick="location.href = './#about'" />
-    <p class="section__text__p1">Explore</p>
-    <h1 class="title"><span>My</span> Skills</h1>
-    <div class="experience-details-container">
-      <div class="about-containers">
-        <div class="details-container">
-          <h2 class="experience-sub-title">Frontend Development</h2>
-          <div class="article-container">
-            <article>
-              <img src="assets/Logos/HTML5_logo_and_wordmark.svg.png" alt="HTML" class="icon" />
-              <div>
-                <h3>HTML</h3>
-                <p>Advanced</p>
-              </div>
-            </article>
-            <article>
-              <img src="assets/Logos/CSS3_logo_and_wordmark.svg.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>CSS</h3>
-                <p>Advanced</p>
-              </div>
-            </article>
 
-            <article>
-              <img src="assets/Logos/JavaScript-logo.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>JavaScript</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
+        <!-- Project 2 -->
+        <div class="work-card glass-card">
+          <div class="work-content p-4">
+            <div class="work-meta mb-1">
+              <span class="status-pill active">LIVE</span>
+              <span class="work-type">Mobile Ecosystem</span>
+            </div>
+            <h3 class="work-title mb-1">DRKIST Faculty & Student Portal Mobile Apps</h3>
+            <p class="work-desc text-muted mb-2">
+              Developed production-ready mobile ecosystems using Flutter and RESTful APIs. Built multi-level approval
+              pipelines for gate passes and leaves, integrating SQLite for offline data persistence. Integrated
+              real-time attendance tracking and 24/7 access to digital course resources, significantly improving data
+              accessibility and reducing administrative paperwork by 50%.
+            </p>
+            <div class="tech-stack mb-3">
+              <span>Flutter</span>
+              <span>Dart</span>
+              <span>REST APIs</span>
+              <span>SQLite</span>
+              <span>PHP</span>
+              <span>Mobile Dev</span>
+            </div>
+            <div class="work-links">
+              <a href="soon.html" class="link-btn">View Codebase <svg viewBox="0 0 24 24" width="16" height="16"
+                  fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg></a>
+            </div>
           </div>
         </div>
-        <div class="details-container">
-          <h2 class="experience-sub-title">Backend Development</h2>
-          <div class="article-container">
-            <article>
-              <img src="assets/Logos/new-php-logo.svg" alt="Experience icon" class="icon" />
-              <div>
-                <h3>PHP</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="assets/Logos/MySQL-Logo.wine.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>MySQL</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-          </div>
-        </div>
-        <div class="details-container">
-          <h2 class="experience-sub-title">Programming Languages</h2>
-          <div class="article-container">
-            <article>
-              <img src="assets/Logos/C_Programming_Language.svg.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>C</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="assets/Logos/python.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Python</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="assets/Logos/hd-java-coffee-cup-logo-transparent-png-701751694771832kcfdn3tm91.png"
-                alt="Experience icon" class="icon" />
-              <div>
-                <h3>JAVA</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-          </div>
-        </div>
-        <div class="details-container">
-          <h2 class="experience-sub-title">Tools</h2>
-          <div class="article-container">
-            <article>
-              <img src="assets/Logos/microsoft-excel-icon-logo-symbol-free-png.webp" alt="Experience icon"
-                class="icon" />
-              <div>
-                <h3>Excel</h3>
-                <p>Advanced(Analysis)</p>
-              </div>
-            </article>
-            <article>
-              <img src="assets/Logos/Microsoft_Office_PowerPoint_Logo_512px.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>PowerPoint</h3>
-                <p>Advanced</p>
-              </div>
-            </article>
-            <article>
-              <img src="assets/Logos/Visual_Studio_Code_1.35_icon.svg.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>VS Code</h3>
-                <p>Advanced</p>
-              </div>
-            </article>
-            <article>
-              <img src="assets/Logos/25231.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>GitHub</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="assets/Logos/chatgpt-7977357_1280.webp" alt="Experience icon" class="icon" />
-              <div>
-                <h3>ChatGPT</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </div>
-    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href = './#projects'" />
-  </section>
-  <section id="projects">
-    <img src="assets/arrow - Copy.png" alt="Arrow icon" class="icon arrow1" onclick="location.href = './#experience'" />
-    <p class="section__text__p1">Browse My</p>
-    <h1 class="title">Recent <span>Projects</span></h1>
-    <div class="experience-details-container">
-      <div class="about-containers">
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="assets/results.png" alt="Project 1" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">
-            Result Management System
-          </h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href = 'soon.html'">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn" onclick="location.href = 'https://drkresults.kesug.com/'">
-              Live Demo
-            </button>
-          </div>
-        </div>
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img
-              src="assets/voice-assistant-sound-wave-microphone-voice-control-technology-voice-sound-recognition-ai-assistant-voice-background_176516-289.avif"
-              alt="Project 2" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">
-            Offline Virtual Voice Assistant
-          </h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href = 'soon.html'">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn" onclick="location.href = 'soon.html'">
-              Live Demo
-            </button>
-          </div>
-        </div>
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="assets\1_e0UlsRVfTM2xw_uVWTsPVg.png" alt="Project 3" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">
-            Indian Traffic Sign Detection
-          </h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="
-                  location.href =
-                    'https://github.com/Hemu-29/Indian-Traffic-Sign-Detection'
-                ">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn" onclick="location.href = 'https://github.com/'">
-              Live Demo
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href = './#contact'" />
-  </section>
-  <section id="contact">
-    <p class="section__text__p1">Get in Touch</p>
-    <h1 class="title"><span>Contact</span> Me</h1>
-    <div class="contact-info-upper-container">
-      <div class="contact-info-container">
-        <img src="./assets/email.png" alt="Email icon" class="icon contact-icon email-icon" />
-        <p>
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=andehemanth24@gmail.com"
-            target="_blank">andehemanth24@gmail.com</a>
-        </p>
-      </div>
-      <div class="contact-info-container">
-        <img src="./assets/linkedin.png" alt="LinkedIn icon" class="icon contact-icon" />
-        <p>
-          <a href="https://www.linkedin.com/in/hemanth-ande-0265a2330/" target="_blank">LinkedIn</a>
-        </p>
-      </div>
-    </div>
-    <div class="btn-container">
-      <button class="btn btn-color-3" onclick="window.open('assets/HemanthAnde_Resume.pdf')">
-        Download CV
-      </button>
-    </div>
-  </section>
 
-  <footer>
-    <nav>
-      <div class="nav-links-container">
-        <ul class="nav-links">
-          <li><a href="#desktop-nav">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#experience">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#serivces">Services</a></li>
-          <li><a class="active" href="#contact">Contact</a></li>
-        </ul>
+        <!-- Project 3 -->
+        <div class="work-card glass-card">
+          <div class="work-content p-4">
+            <div class="work-meta mb-1">
+              <span class="status-pill active">LIVE (2.5K+)</span>
+              <span class="work-type">Full Stack Platform</span>
+            </div>
+            <h3 class="work-title mb-1">Student Results Management System (DRKIST)</h3>
+            <p class="work-desc text-muted mb-2">
+              Architected a full-stack application using PHP and MySQL to parse complex Excel result files and map them
+              to dynamic student profiles. Engineered custom logic to handle multiple JNTUH regulations, and automated
+              regular/supplementary exam updates. Successfully deployed the platform to serve over 2,500 students,
+              resulting in an 80% reduction in administrative workloads.
+            </p>
+            <div class="tech-stack mb-3">
+              <span>PHP</span>
+              <span>MySQL</span>
+              <span>Relational Databases</span>
+              <span>Web Development</span>
+            </div>
+            <div class="work-links">
+              <a href="https://drkist.edu.in/Results/index.php" target="_blank" class="link-btn">Launch Application <svg
+                  viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="work-card glass-card">
+          <div class="work-content p-4">
+            <div class="work-meta mb-1">
+              <span class="status-pill active">VALIDATED</span>
+              <span class="work-type">Infosec / Networking</span>
+            </div>
+            <h3 class="work-title mb-1">LAN Monitoring & Reporting System (HAL)</h3>
+            <p class="work-desc text-muted mb-2">
+              Developed and deployed an automated LAN monitoring system to secure network integrity and scan for
+              unauthorized access after working hours. Engineered a C# (.NET) application leveraging PowerShell to scan
+              for active IP/MAC addresses and unauthorized shared folders. Designed a secure logging pipeline to an
+              Oracle database for real-time analysis via a custom web dashboard.
+            </p>
+            <div class="tech-stack mb-3">
+              <span>C#</span>
+              <span>.NET Framework</span>
+              <span>PowerShell</span>
+              <span>Oracle Database</span>
+              <span>Network Security</span>
+            </div>
+            <div class="work-links">
+              <a href="soon.html" class="link-btn">View Concept <svg viewBox="0 0 24 24" width="16" height="16"
+                  fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="work-card glass-card" style="grid-column: 1 / -1;">
+          <div class="work-content p-4">
+            <div class="work-meta mb-1">
+              <span class="status-pill active">COMPLETED</span>
+              <span class="work-type">AI / Computer Vision</span>
+            </div>
+            <h3 class="work-title mb-1">Indian Traffic Sign Detection and Recognition</h3>
+            <p class="work-desc text-muted mb-2">
+              Fine-tuned a Faster R-CNN architecture using PyTorch to identify and classify regional traffic signs in
+              real-world conditions. Utilized OpenCV for live video stream processing, rendering real-time bounding box
+              overlays and class labels
+            </p>
+            <div class="tech-stack mb-3">
+              <span>PyTorch</span>
+              <span>Computer Vision</span>
+              <span>OpenCV</span>
+              <span>Python</span>
+            </div>
+            <div class="work-links">
+              <a href="https://github.com/Hemu-29/Indian-Traffic-Sign-Detection" target="_blank" class="link-btn">View
+                Repository <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                  stroke-width="2">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg></a>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </nav>
-    <p>Copyright &#169; 2025 Hemanth Ande. All Rights Reserved.</p>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="container" style="margin-bottom: 5rem;">
+      <div class="contact-card glass-card p-4 text-center">
+        <h2 class="section-title mb-1" style="margin-bottom: 0.5rem;">Let's Build the Future</h2>
+        <p class="text-muted mb-4 max-w-2xl mx-auto">
+          I'm currently looking for new opportunities mapping technical complexity into elegant user solutions. My inbox
+          is always open.
+        </p>
+        <a href="mailto:andehemanth24@gmail.com" class="btn btn-primary"
+          style="display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 999px;">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          Say Hello
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container flex-between align-center">
+      <div class="footer-logo logo">Hemanth<span class="gradient-text">Ande</span></div>
+      <p class="text-muted text-small">© 2026. Architected & Designed with precision.</p>
+    </div>
   </footer>
+
   <script src="script.js"></script>
 </body>
 
