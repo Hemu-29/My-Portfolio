@@ -61,6 +61,7 @@ export default function About() {
           duration: 1,
           ease: EASE.outExpo,
           stagger: 0.1,
+          immediateRender: false,
           scrollTrigger: { trigger, start: "top 82%" },
           ...vars,
         });

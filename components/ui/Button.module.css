@@ -40,6 +40,15 @@
 .btn:hover .fill {
   transform: translate(-50%, -50%) scale(1);
 }
+/* touch has no hover — the tap drives the same fill, same timing */
+@media (hover: none) {
+  .btn:active .fill {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .btn:active .labelStack {
+    transform: translateY(-50%);
+  }
+}
 
 /* rolling label */
 .labelWrap {

@@ -20,11 +20,16 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger, EASE } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
+import { sceneScrub } from "@/lib/scene";
 import { ROLES } from "@/content/experience";
 import styles from "./Experience.module.css";
 import { useLang, L } from "@/lib/i18n";
 
-const STEP_VH = 0.9; /* scroll length per board */
+/* Scroll length per board. Kept deliberately short: Work, Experience and
+   Credentials are three pinned set-pieces in a row, so each one holds only as
+   long as its own interaction needs — the page reads as cinematic beats
+   rather than one long locked stretch. */
+const STEP_VH = 0.62;
 const DEPTH = 3; /* panels rendered behind the active one — depth/context */
 
 /* Stack geometry (px). NOTE: the stage's rotateX turns part of each board's
@@ -110,11 +115,9 @@ export default function Experience() {
       gsap.ticker.add(tick);
       place(0);
 
+      /* the Scene's sticky hold does the pinning; this only reads progress */
       const st = ScrollTrigger.create({
-        trigger: el,
-        start: "top top",
-        end: () => `+=${n * window.innerHeight * STEP_VH}`,
-        pin: true,
+        ...sceneScrub(el),
         scrub: 0.5,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
@@ -159,6 +162,7 @@ export default function Experience() {
         duration: 0.9,
         ease: EASE.outExpo,
         stagger: 0.09,
+        immediateRender: false,
         scrollTrigger: { trigger: el, start: "top 72%" },
       });
 
@@ -179,6 +183,7 @@ export default function Experience() {
           autoAlpha: 0,
           duration: 0.85,
           ease: EASE.outExpo,
+          immediateRender: false,
           scrollTrigger: { trigger: b, start: "top 88%" },
         });
       });

@@ -24,6 +24,7 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { sceneScrub } from "@/lib/scene";
 import styles from "./TunnelIntro.module.css";
 import { useLang } from "@/lib/i18n";
 
@@ -420,12 +421,11 @@ export default function TunnelIntro({ text = "GIREESH" }: { text?: string }) {
     };
     startLoop();
 
-    /* ================= the pinned journey ================= */
+    /* ================= the journey, held by its Scene =================
+       The Scene's sticky hold pins this section, so no `pin` here — this
+       trigger only reads progress across the scene's runway. */
     const st = ScrollTrigger.create({
-      trigger: rootEl,
-      start: "top top",
-      end: () => `+=${Math.round(window.innerHeight * JOURNEY_VIEWPORTS)}`,
-      pin: true,
+      ...sceneScrub(rootEl),
       scrub: 0.6,
       invalidateOnRefresh: true,
       onUpdate: (self) => {

@@ -30,7 +30,6 @@ export const DICT: Record<string, Entry> = {
   "nav.about": { en: "About", fr: "À propos" },
   "nav.work": { en: "Work", fr: "Projets" },
   "nav.contact": { en: "Contact", fr: "Contact" },
-  "nav.book": { en: "Book a Call", fr: "Réserver un appel" },
 
   /* ---------------- intro ---------------- */
   "intro.scroll": { en: "Scroll to enter", fr: "Faites défiler pour entrer" },
@@ -84,27 +83,14 @@ export const DICT: Record<string, Entry> = {
   },
   "about.cta": { en: "Explore My Work", fr: "Découvrir mes projets" },
 
-  /* ---------------- journey ---------------- */
+  /* ---------------- journey ----------------
+     Chapter copy lives in content/journey.ts; only the chrome is here. */
   "journey.eyebrow": { en: "My Journey", fr: "Mon parcours" },
-  "jr.s1": {
-    en: "Roots in sales — Telangana, India",
-    fr: "Mes racines dans la vente — Telangana, Inde",
-  },
-  "jr.s2": {
-    en: "Analysis & measurement — France",
-    fr: "Analyse & mesure — France",
-  },
-  "jr.s3": {
-    en: "Product Design — Heeding Climate Solutions",
-    fr: "Product Design — Heeding Climate Solutions",
-  },
-  "jr.s4": {
-    en: "Enhanced by AI, designed with humans",
-    fr: "Augmenté par l’IA, conçu avec des humains",
-  },
-  "jr.s5": {
-    en: "Designing for climate & AI",
-    fr: "Concevoir pour le climat & l’IA",
+  "journey.enter": { en: "Scroll to travel", fr: "Faites défiler pour avancer" },
+  "journey.chapter": { en: "Chapter", fr: "Chapitre" },
+  "journey.lede": {
+    en: "From Telangana to the Côte d’Azur — the chapters that turned a salesperson into a product designer.",
+    fr: "Du Telangana à la Côte d’Azur — les chapitres qui ont transformé un commercial en product designer.",
   },
 
   /* ---------------- design stack ---------------- */
@@ -155,6 +141,13 @@ export const DICT: Record<string, Entry> = {
     en: "Five programmes · Coursera, LinkedIn Learning and hands-on portfolio projects.",
     fr: "Cinq programmes · Coursera, LinkedIn Learning et projets concrets.",
   },
+  "cert.eyebrow": { en: "Credentials", fr: "Titres & certifications" },
+  "cert.h2": { en: "Credentials", fr: "Certifications" },
+  "cert.lede": {
+    en: "Professional certifications and credentials earned throughout my design and technology journey.",
+    fr: "Les certifications et titres professionnels obtenus tout au long de mon parcours en design et en technologie.",
+  },
+  "cert.certified": { en: "Certified", fr: "Certifié" },
   "cert.brandRole": { en: "Product Designer", fr: "Product Designer" },
   "cert.issuerTBC": { en: "Issuer — to confirm", fr: "Organisme — à confirmer" },
   "cert.certification": { en: "Certification", fr: "Certification" },
@@ -168,18 +161,20 @@ export const DICT: Record<string, Entry> = {
   "cert.verify": { en: "Verify credential ↗", fr: "Vérifier le justificatif ↗" },
   "cert.foot": { en: "Credentials", fr: "Titres" },
 
-  /* ---------------- moments ---------------- */
-  "moments.eyebrow": { en: "Moments", fr: "Moments" },
-  "moments.h2": { en: "More than just", fr: "Bien plus que du" },
-  "moments.h2Em": { en: "design.", fr: "design." },
-  "moments.lede": {
-    en: "The people, places and late nights that shaped the work — every tile is a chapter.",
-    fr: "Les personnes, les lieux et les nuits blanches qui ont façonné le travail — chaque image est un chapitre.",
+  /* ---------------- gallery — the people behind the work ---------------- */
+  "gallery.eyebrow": { en: "The Archive", fr: "L’archive" },
+  "gallery.h2a": { en: "The people behind", fr: "Celles et ceux derrière" },
+  "gallery.h2Em": { en: "the work", fr: "le travail" },
+  "gallery.lede": {
+    en: "The people, moments and experiences that shaped the work behind the screen.",
+    fr: "Les personnes, les moments et les expériences qui ont façonné le travail derrière l’écran.",
   },
-  "moments.prev": { en: "← Previous", fr: "← Précédent" },
-  "moments.next": { en: "Next →", fr: "Suivant →" },
-  "moments.soon": { en: "▢  PHOTO COMING SOON", fr: "▢  PHOTO À VENIR" },
-  "moments.close": { en: "Close", fr: "Fermer" },
+  "gallery.alt": {
+    en: "A moment with the people behind the work",
+    fr: "Un moment avec celles et ceux derrière le travail",
+  },
+  "gallery.frames": { en: "Frames", fr: "Images" },
+  "gallery.hint": { en: "Scroll to travel the archive", fr: "Faites défiler pour parcourir l’archive" },
 
   /* ---------------- connect ---------------- */
   "connect.eyebrow": { en: "Let’s Connect", fr: "Restons en contact" },
@@ -199,6 +194,8 @@ export const DICT: Record<string, Entry> = {
   "case.role": { en: "Role", fr: "Rôle" },
   "case.timeline": { en: "Timeline", fr: "Période" },
   "case.focus": { en: "Focus", fr: "Focus" },
+  "case.site": { en: "Live product", fr: "Produit en ligne" },
+  "case.repo": { en: "Source", fr: "Code source" },
   "case.cover": { en: "COVER", fr: "VISUEL" },
   "case.context": { en: "Context", fr: "Contexte" },
   "case.problem": { en: "The Problem", fr: "Le problème" },

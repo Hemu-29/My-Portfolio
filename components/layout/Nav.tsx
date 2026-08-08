@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import Button from "@/components/ui/Button";
 import LanguageToggle from "./LanguageToggle";
 import { useLang } from "@/lib/i18n";
 import styles from "./Nav.module.css";
@@ -93,9 +92,6 @@ export default function Nav() {
         </nav>
 
         <div className={styles.right}>
-          <Button href="#contact" variant="dark" size="sm" arrow>
-            {t("nav.book")}
-          </Button>
           <LanguageToggle />
         </div>
       </div>
