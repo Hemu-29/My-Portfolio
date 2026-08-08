@@ -113,6 +113,34 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   animation: rise 0.9s var(--ease-out-expo) 0.12s both;
+  overflow: hidden;
+}
+/* his own capture of the built site — fills the cover */
+.coverPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* verified brand mark / typographic cover (mirrors the Work card language) */
+.coverBrand {
+  width: min(52%, 420px);
+  height: auto;
+  object-fit: contain;
+}
+.coverMark {
+  font-weight: 900;
+  font-size: clamp(64px, 10vw, 140px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.siteLink {
+  color: var(--accent);
+  transition: opacity 0.25s ease;
+}
+.siteLink:hover {
+  opacity: 0.7;
 }
 
 /* ---------- sections ---------- */

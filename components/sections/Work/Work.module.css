@@ -106,7 +106,7 @@
 
 .cover {
   position: relative;
-  height: 300px;
+  height: 258px; /* trimmed to make room for the contribution line */
   background: var(--ph);
   display: flex;
   align-items: center;
@@ -130,6 +130,77 @@
   box-shadow: 0 8px 20px rgba(20, 20, 20, 0.1);
 }
 
+/* his own capture of the built site — fills the cover */
+.coverPhoto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* verified brand mark centred on its brand ground */
+.coverBrand {
+  width: min(66%, 200px);
+  height: auto;
+  object-fit: contain;
+}
+/* typographic cover for projects with no supplied asset yet */
+.coverMark {
+  font-weight: 900;
+  font-size: clamp(44px, 4.2vw, 60px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+/* verified brand destination — sibling of the card link (never nested) */
+.siteChip {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(20, 20, 20, 0.08);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.3s ease, transform 0.35s var(--ease-out-expo),
+    background 0.25s ease, color 0.25s ease;
+}
+.siteChip i {
+  font-style: normal;
+  color: var(--accent);
+  transition: color 0.25s ease;
+}
+.card:hover .siteChip,
+.siteChip:focus-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.siteChip:hover {
+  background: var(--ink);
+  color: #fff;
+}
+.siteChip:hover i {
+  color: #fff;
+}
+/* touch devices have no hover — the chip is simply always present */
+@media (hover: none) {
+  .siteChip {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .meta {
   padding: 18px 20px 20px;
 }
@@ -139,6 +210,17 @@
   letter-spacing: -0.01em;
   line-height: 1.3;
   color: var(--ink);
+}
+/* the card's one-line "what I did" — clamped so FR length can't break the arc */
+.contribution {
+  margin-top: 8px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .tags {
   font-size: 10.5px;

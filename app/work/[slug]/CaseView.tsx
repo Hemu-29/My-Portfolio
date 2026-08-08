@@ -65,10 +65,71 @@ export default function CaseView({ slug }: { slug: string }) {
               <b>{t("case.focus")}</b>
               <span>{tags.join(" · ")}</span>
             </div>
+            {/* verified official destinations only — never a guessed URL */}
+            {project.site && (
+              <div>
+                <b>{t("case.site")}</b>
+                <span>
+                  <a
+                    className={styles.siteLink}
+                    href={project.site.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {project.site.label} ↗
+                  </a>
+                </span>
+              </div>
+            )}
+            {project.repo && (
+              <div>
+                <b>{t("case.repo")}</b>
+                <span>
+                  <a
+                    className={styles.siteLink}
+                    href={project.repo}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    GitHub ↗
+                  </a>
+                </span>
+              </div>
+            )}
           </div>
-          <div className={styles.cover}>
-            ▢&nbsp;&nbsp;{project.coverLabel} — {t("case.cover")}
-          </div>
+          {project.cover ? (
+            <div
+              className={styles.cover}
+              style={{
+                background: project.cover.bg,
+                color: project.cover.ink === "light" ? "#fff" : "var(--ink)",
+              }}
+            >
+              {project.cover.src && project.cover.variant === "photo" ? (
+                <img
+                  className={styles.coverPhoto}
+                  src={project.cover.src}
+                  alt={project.coverLabel}
+                  style={
+                    project.cover.focus ? { objectPosition: project.cover.focus } : undefined
+                  }
+                />
+              ) : project.cover.src ? (
+                <img
+                  className={styles.coverBrand}
+                  src={project.cover.src}
+                  alt={project.coverLabel}
+                  style={{ aspectRatio: project.cover.aspect ?? 1 }}
+                />
+              ) : (
+                <span className={styles.coverMark}>{project.cover.mark}</span>
+              )}
+            </div>
+          ) : (
+            <div className={styles.cover}>
+              ▢&nbsp;&nbsp;{project.coverLabel} — {t("case.cover")}
+            </div>
+          )}
         </header>
 
         {/* ---- context ---- */}
