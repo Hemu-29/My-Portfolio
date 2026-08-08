@@ -30,6 +30,8 @@ export const DICT: Record<string, Entry> = {
   "nav.about": { en: "About", fr: "À propos" },
   "nav.work": { en: "Work", fr: "Projets" },
   "nav.contact": { en: "Contact", fr: "Contact" },
+  "nav.menu": { en: "Open menu", fr: "Ouvrir le menu" },
+  "nav.close": { en: "Close menu", fr: "Fermer le menu" },
 
   /* ---------------- intro ---------------- */
   "intro.scroll": { en: "Scroll to enter", fr: "Faites défiler pour entrer" },

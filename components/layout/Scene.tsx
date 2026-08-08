@@ -39,6 +39,7 @@ export default function Scene({
   runway = 0,
   order,
   id,
+  keepOnMobile = false,
 }: {
   children: ReactNode;
   /** extra scroll length, in viewport heights, for scroll-driven interiors */
@@ -46,15 +47,26 @@ export default function Scene({
   /** paint order — later scenes must cover earlier ones */
   order: number;
   id?: string;
+  /**
+   * Keep the full-screen frame on phones too. Only for scenes that genuinely
+   * fill one screen at that size (the tunnel, the journey, the drift wall).
+   * Everything else releases into normal flow on mobile, because a 100svh
+   * frame would clip a tall stacked layout — see Scene.module.css.
+   */
+  keepOnMobile?: boolean;
 }) {
   return (
     <>
-      <div className={styles.hold} data-scene={id ?? String(order)} style={{ zIndex: order }}>
+      <div
+        className={`${styles.hold} ${keepOnMobile ? styles.keepFrame : ""}`}
+        data-scene={id ?? String(order)}
+        style={{ zIndex: order }}
+      >
         {children}
       </div>
       {runway > 0 && (
         <div
-          className={styles.runway}
+          className={`${styles.runway} ${keepOnMobile ? styles.keepRunway : ""}`}
           data-runway={id ?? String(order)}
           style={{ height: `calc(${runway} * 100svh)` }}
           aria-hidden="true"

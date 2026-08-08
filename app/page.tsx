@@ -35,7 +35,10 @@ export default function Home() {
     <>
       <Nav />
       <main>
-        <Scene order={1} runway={6} id="intro">
+        {/* keepOnMobile: these three fill one screen at any size, so they stay
+            cinematic frames on phones too. The rest release into normal flow —
+            their mobile layouts are tall and a fixed frame would clip them. */}
+        <Scene order={1} runway={6} id="intro" keepOnMobile>
           <TunnelIntro />
         </Scene>
 
@@ -47,7 +50,7 @@ export default function Home() {
           <About />
         </Scene>
 
-        <Scene order={4} runway={6} id="journey">
+        <Scene order={4} runway={6} id="journey" keepOnMobile>
           <Journey />
         </Scene>
 
@@ -67,7 +70,7 @@ export default function Home() {
           <Certifications />
         </Scene>
 
-        <Scene order={9} runway={1.6} id="gallery">
+        <Scene order={9} runway={1.6} id="gallery" keepOnMobile>
           <Gallery />
         </Scene>
 

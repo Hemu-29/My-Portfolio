@@ -51,8 +51,15 @@ export default function Hero() {
       /* ---------- Entrance: plays when the hero ARRIVES (revealed by the
          tunnel opening above it), not on page load ---------- */
       const tl = gsap.timeline({
-        defaults: { ease: EASE.outExpo },
-        scrollTrigger: { trigger: el, start: "top 75%", once: true },
+        /* immediateRender:false is load-bearing here, not a nicety. Every
+           tween below is a `.from()`, which by default hides its target the
+           moment the timeline is built and only restores it when the trigger
+           fires. If that trigger never resolves — which happens when the
+           section is held inside a scene — the kicker, sub-copy and BOTH
+           CTAs stay invisible forever. This way the hero renders complete
+           and the entrance is an enhancement layered on top. */
+        defaults: { ease: EASE.outExpo, immediateRender: false },
+        scrollTrigger: { trigger: el, start: "top 85%", once: true },
       });
 
       tl.from(`.${styles.ambient} > *`, { autoAlpha: 0, duration: 1.8, stagger: 0.06, ease: "power1.out" }, 0)

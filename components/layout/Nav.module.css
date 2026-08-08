@@ -136,12 +136,144 @@
   align-items: center;
   gap: 14px;
 }
+/* ============ MOBILE NAVIGATION ============
+   The pill can't carry four links plus the toggle at phone widths, so below
+   900px the links move into a drawer behind a menu button. Previously they
+   were simply `display: none` — the header had no navigation at all. */
+
+.burger {
+  display: none;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--ink);
+  flex: 0 0 auto;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.burger span {
+  position: absolute;
+  left: 50%;
+  width: 16px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: #fff;
+  transition: transform 0.4s var(--ease-out-expo), opacity 0.25s ease;
+}
+.burger span:first-child {
+  transform: translate(-50%, -3.5px);
+}
+.burger span:last-child {
+  transform: translate(-50%, 3.5px);
+}
+.burgerOpen span:first-child {
+  transform: translate(-50%, 0) rotate(45deg);
+}
+.burgerOpen span:last-child {
+  transform: translate(-50%, 0) rotate(-45deg);
+}
+
+/* the drawer itself */
+.sheet {
+  pointer-events: auto;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 20px;
+  right: 20px;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px -18px rgba(20, 20, 20, 0.22);
+  padding: 8px;
+  opacity: 0;
+  transform: translateY(-10px) scale(0.985);
+  transform-origin: 50% 0;
+  transition: opacity 0.32s ease, transform 0.42s var(--ease-out-expo);
+}
+.sheetOpen {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.sheet nav {
+  display: flex;
+  flex-direction: column;
+}
+.sheet a {
+  /* a generous touch target — 52px, comfortably over the 44px minimum */
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 18px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink-2);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.sheet a:active {
+  background: var(--ink);
+  color: #fff;
+}
+.sheetOn {
+  color: var(--ink);
+  background: rgba(20, 20, 20, 0.05);
+}
+
+/* tap-anywhere-to-close, behind the drawer */
+.scrim {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: rgba(20, 20, 20, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  cursor: default;
+}
+.scrimOn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 @media (max-width: 900px) {
   .links {
     display: none;
   }
+  .wrap {
+    top: 12px;
+    padding: 0 14px;
+  }
   .cap {
-    width: auto;
-    gap: 18px;
+    width: 100%;
+    gap: 12px;
+    padding: 8px 8px 8px 18px;
+  }
+  .logo {
+    font-size: 17px;
+  }
+  .right {
+    gap: 10px;
+  }
+  .burger {
+    display: block;
+  }
+  .scrim {
+    display: block;
+  }
+  .sheet {
+    left: 14px;
+    right: 14px;
+  }
+}
+
+/* the drawer is a mobile affordance only */
+@media (min-width: 901px) {
+  .sheet {
+    display: none;
   }
 }

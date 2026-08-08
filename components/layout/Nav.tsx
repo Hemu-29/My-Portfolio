@@ -19,6 +19,33 @@ export default function Nav() {
   const ref = useRef<HTMLElement>(null);
   const { t } = useLang();
   const [active, setActive] = useState<string | null>(null);
+  /* mobile drawer — the desktop pill can't hold four links plus the toggle
+     at phone widths, so below 900px navigation lives behind a menu button
+     rather than being hidden entirely (which is what it was doing) */
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  /* close on Escape, and lock the page behind the open drawer */
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [menuOpen]);
+
+  /* never leave the drawer open behind a resize to desktop */
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 901px)");
+    const close = () => mq.matches && setMenuOpen(false);
+    mq.addEventListener("change", close);
+    return () => mq.removeEventListener("change", close);
+  }, []);
 
   useEffect(() => {
     const nav = ref.current;
@@ -93,8 +120,47 @@ export default function Nav() {
 
         <div className={styles.right}>
           <LanguageToggle />
+          <button
+            type="button"
+            className={`${styles.burger} ${menuOpen ? styles.burgerOpen : ""}`}
+            aria-label={menuOpen ? t("nav.close") : t("nav.menu")}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+          </button>
         </div>
       </div>
+
+      {/* ---------- mobile drawer ---------- */}
+      <div
+        className={`${styles.sheet} ${menuOpen ? styles.sheetOpen : ""}`}
+        id="mobile-nav"
+        hidden={!menuOpen}
+      >
+        <nav aria-label="Primary mobile">
+          {LINKS.map((l) => (
+            <a
+              key={l.key}
+              href={l.href}
+              className={l.watch === active ? styles.sheetOn : ""}
+              aria-current={l.watch === active ? "page" : undefined}
+              onClick={() => setMenuOpen(false)}
+            >
+              {t(l.key)}
+            </a>
+          ))}
+        </nav>
+      </div>
+      <button
+        type="button"
+        className={`${styles.scrim} ${menuOpen ? styles.scrimOn : ""}`}
+        aria-label={t("nav.close")}
+        tabIndex={menuOpen ? 0 : -1}
+        onClick={() => setMenuOpen(false)}
+      />
     </header>
   );
 }
