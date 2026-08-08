@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gireesh — Portfolio
 
-## Getting Started
+Personal portfolio of **Gireesh Kumar Reddy Kolli**, Product Designer & UX
+Consultant (Antibes, France). A single-page cinematic experience: full-screen
+scenes stacked on top of each other, each one rising over the last as you
+scroll, with scroll-driven set pieces inside them.
 
-First, run the development server:
+**Live product work:** [myheeding.com](https://www.myheeding.com/en) ·
+**Profiles:** [LinkedIn](https://www.linkedin.com/in/gireesh-kumar-reddy-kolli-) ·
+[GitHub](https://github.com/gireeshkumarreddy) ·
+[Instagram](https://www.instagram.com/itsgireeshreddy)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Stack
+
+| Concern | Choice |
+|---|---|
+| Framework | Next.js 16 (App Router) + TypeScript |
+| Animation | GSAP + ScrollTrigger |
+| Smooth scroll | Lenis (single rAF loop, see `lib/lenis.ts`) |
+| 3D | Three.js (intro tunnel, journey light cables) |
+| Styling | CSS Modules + design tokens in `app/globals.css` |
+| Content | Typed local files in `content/` |
+| i18n | EN/FR React context (`lib/i18n.tsx`) — pure state, survives scroll |
+
+## The scenes
+
+1. **Intro** — Three.js gallery tunnel travelled through the "GIREESH" mask
+2. **Hero** — headline, stats, CTAs
+3. **About** — identity, philosophy, velocity marquee
+4. **Journey** — six resume chapters (2021–2026) inside a light-cable tunnel
+5. **Design Stack** — tool spiral
+6. **Work** — 14 selected projects on a perspective card arc, each with a
+   case-study route at `/work/[slug]`
+7. **Experience** — seven roles as a stacked panel deck
+8. **Credentials** — certification records with issuer marks, right-to-centre deck
+9. **Gallery** — *The People Behind the Work*: 14 photographs on a drifting wall
+10. **Connect** — contact, socials, footer
+
+## Scroll architecture
+
+The page is a stack, not a column. Each scene is a sticky `100svh` hold plus a
+runway sibling rendered directly under `<main>` (`components/layout/Scene.tsx`):
+the outgoing frame stays pinned while the next one physically rises from the
+bottom of the viewport and covers it. Scroll-driven interiors read their
+progress off the runway (`lib/scene.ts`) rather than pinning themselves, so
+every transition is scrubbable and reverses exactly.
+
+## Structure
+
+```
+app/            layout, the scene stack (page.tsx), /work/[slug] case studies,
+                sitemap, robots, 404, /tunnel lab route
+components/
+  layout/       Nav, Scene, LanguageToggle, SmoothScroll
+  sections/     one folder per scene (component + module.css)
+  ui/           Button (the site-wide CTA standard), VelocityMarquee
+content/        typed content: projects, journey, experience, certifications,
+                gallery, stack
+lib/            gsap/lenis integration, i18n store, scene scrub helper, site meta
+public/images/  covers, gallery photographs, issuer + company marks
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Running it
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build (all routes statically generated)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Set `NEXT_PUBLIC_SITE_URL` once a domain exists — sitemap, robots, OG and
+JSON-LD follow automatically (`lib/site.ts`).
 
-## Learn More
+## Conventions
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Every motion path checks `prefers-reduced-motion` and ships a readable
+  static fallback; content is never gated behind an animation.
+- Only `transform` / `opacity` are animated; interiors run scroll → target →
+  interpolation, never raw scroll binding.
+- Photographs and brand marks render at their true aspect ratios — cropped by
+  `object-fit` when needed, never stretched, never dimmed.
+- Proper nouns (companies, products, tools, places) are never translated.
