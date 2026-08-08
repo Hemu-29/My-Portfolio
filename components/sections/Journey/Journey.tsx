@@ -196,6 +196,7 @@ export default function Journey() {
         duration: 0.9,
         ease: EASE.outExpo,
         stagger: 0.09,
+        immediateRender: false,
         scrollTrigger: { trigger: el, start: "top 72%" },
       });
 
@@ -215,6 +216,7 @@ export default function Journey() {
           autoAlpha: 0,
           duration: 1,
           ease: EASE.outExpo,
+          immediateRender: false,
           scrollTrigger: { trigger: plane, start: "top 84%" },
         });
       });

@@ -25,26 +25,29 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { sceneScrub } from "@/lib/scene";
+import { CHAPTERS } from "@/content/journey";
 import styles from "./LightJourney.module.css";
-import { useLang } from "@/lib/i18n";
-
-const STAGES = [
-  { year: "2021", key: "jr.s1" },
-  { year: "2025", key: "jr.s2" },
-  { year: "2026", key: "jr.s3" },
-  { year: "AI × Design", key: "jr.s4" },
-  { year: "Next", key: "jr.s5" },
-]
+import { useLang, L } from "@/lib/i18n";
 
 /* palette progression across the journey */
 const PALETTE = ["#0072E3", "#FF6A00", "#FF2E0F", "#AB54F7", "#00AA3C"];
 
-const JOURNEY_VIEWPORTS = 4;
+/* One viewport of scroll per chapter, so a chapter can actually be read
+   before the tunnel moves on. */
+const JOURNEY_VIEWPORTS = CHAPTERS.length;
 const DEPTH = 30;
 const RADIUS = 1.12;
 const WAVINESS = 0.3;
 const TRAVEL_TOTAL = 26; /* pulse-phase travel across the journey */
-const T_EXIT = 0.84; /* white return begins */
+const T_EXIT = 0.9; /* white return begins */
+
+/* Chapters live inside this slice of the pin: the head is the section
+   title settling, the tail is the last chapter holding before the whiteout
+   takes over. Text is never asked to compete with the dissolve. */
+const CH_START = 0.06;
+const CH_END = 0.86;
+const CH_SPAN = (CH_END - CH_START) / CHAPTERS.length;
 
 const VERT = /* glsl */ `
   varying float vT;
@@ -82,7 +85,10 @@ export default function LightJourney() {
   const frameRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [webglOk, setWebglOk] = useState(true);
-  const { t } = useLang();
+  /* reduced motion (or no WebGL) drops the pin entirely, so the chapters
+     have to be readable as a plain stack — content is never motion-gated */
+  const [staticMode, setStaticMode] = useState(false);
+  const { t, lang } = useLang();
 
   useEffect(() => {
     const rootEl = rootRef.current;
@@ -91,6 +97,7 @@ export default function LightJourney() {
     if (!rootEl || !frame || !canvas) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) setStaticMode(true);
     const compact = window.matchMedia("(max-width: 700px)").matches;
     const CABLES = compact ? 10 : 20;
     const DPR_CAP = compact ? 1.5 : 2;
@@ -243,10 +250,13 @@ export default function LightJourney() {
     let mx = 0;
     let my = 0;
 
-    const labelEls = Array.from(rootEl.querySelectorAll<HTMLElement>(`.${styles.stageLabel}`));
-    const introLabel = rootEl.querySelector<HTMLElement>(`.${styles.introLabel}`);
+    const chapterEls = Array.from(rootEl.querySelectorAll<HTMLElement>(`.${styles.chapter}`));
+    const tickEls = Array.from(rootEl.querySelectorAll<HTMLElement>(`.${styles.tick}`));
+    const introEl = rootEl.querySelector<HTMLElement>(`.${styles.intro}`);
+    const counterEl = rootEl.querySelector<HTMLElement>(`.${styles.counterNow}`);
+    const narrative = rootEl.querySelector<HTMLElement>(`.${styles.overlay}`);
     const whiteout = rootEl.querySelector<HTMLElement>(`.${styles.whiteout}`);
-    let stageShown = -1;
+    let shown = -1;
 
     const onPointerMove = (e: PointerEvent) => {
       const r = frame.getBoundingClientRect();
@@ -287,6 +297,9 @@ export default function LightJourney() {
       for (const c of cables) c.mat.uniforms.uMaster.value = 1 - eased;
       coreMat.opacity = 0.85 * (1 - eased) + 0.6 * eased;
       if (whiteout) whiteout.style.opacity = String(eased);
+      /* the story dissolves with the tunnel — white text never gets
+         stranded on the white exit */
+      if (narrative) narrative.style.opacity = String(1 - eased);
 
       /* atmosphere: camera lean + slow sway */
       camera.position.x += (mx * 0.06 - camera.position.x) * 0.05;
@@ -308,25 +321,35 @@ export default function LightJourney() {
       cancelAnimationFrame(raf);
     };
 
-    /* ---------- the pinned journey ---------- */
+    /* ---------- the journey, held by its Scene ----------
+       The Scene's sticky hold pins this section, so no `pin` here — this
+       trigger only reads progress across the scene's runway. */
     const st = ScrollTrigger.create({
-      trigger: rootEl,
-      start: "top top",
-      end: () => `+=${Math.round(window.innerHeight * JOURNEY_VIEWPORTS)}`,
-      pin: true,
+      ...sceneScrub(rootEl),
       scrub: 0.6,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
         progress = self.progress;
-        /* labels: intro first, then one stage at a time */
-        if (introLabel) introLabel.style.opacity = String(Math.max(0, 1 - self.progress * 9));
-        const stage = Math.min(
-          STAGES.length - 1,
-          Math.floor(self.progress * STAGES.length)
-        );
-        if (stage !== stageShown) {
-          stageShown = stage;
-          labelEls.forEach((l, i) => l.classList.toggle(styles.stageOn, i === stage));
+        const p = self.progress;
+
+        /* the section title hands over to chapter one */
+        if (introEl) introEl.style.opacity = String(gsap.utils.clamp(0, 1, 1 - p / CH_START));
+
+        /* one chapter at a time; -1 while the title still owns the frame */
+        const idx =
+          p < CH_START
+            ? -1
+            : Math.min(CHAPTERS.length - 1, Math.floor((p - CH_START) / CH_SPAN));
+
+        if (idx !== shown) {
+          shown = idx;
+          /* class swap only — the stagger and crossfade are CSS, so the
+             text never re-lays-out mid-scroll */
+          chapterEls.forEach((el, i) => el.classList.toggle(styles.on, i === idx));
+          tickEls.forEach((el, i) => el.classList.toggle(styles.tickOn, i <= idx));
+          if (counterEl) {
+            counterEl.textContent = String(Math.max(0, idx) + 1).padStart(2, "0");
+          }
         }
       },
       onToggle: (self) => (self.isActive ? startLoop() : stopLoop()),
@@ -357,35 +380,78 @@ export default function LightJourney() {
     };
   }, []);
 
+  const isStatic = staticMode || !webglOk;
+
   return (
     <section className={styles.journey} id="journey" ref={rootRef}>
-      <div className={styles.frame} ref={frameRef}>
+      <div
+        className={`${styles.frame} ${isStatic ? styles.frameStatic : ""}`}
+        ref={frameRef}
+      >
         {webglOk ? (
           <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
         ) : null}
 
-        {/* minimal narrative layer */}
-        <div className={styles.overlay} aria-hidden="true">
-          <p className={styles.introLabel}>
-            <span>02</span> {t("journey.eyebrow")}
-          </p>
-          {STAGES.map((s, i) => (
-            <div className={`${styles.stageLabel} ${i === 0 ? styles.stageOn : ""}`} key={s.year}>
-              <span className={styles.stageYear}>{s.year}</span>
-              <span className={styles.stageText}>{t(s.key)}</span>
+        {/* ---------- travelling narrative (the scroll experience) ---------- */}
+        {!isStatic && (
+          <>
+            {/* keeps white type legible wherever the cables flare */}
+            <div className={styles.scrim} aria-hidden="true" />
+
+            <div className={styles.overlay} aria-hidden="true">
+              <div className={styles.intro}>
+                <p className={styles.introLabel}>
+                  <span>02</span> {t("journey.eyebrow")}
+                </p>
+                <p className={styles.introLede}>{t("journey.lede")}</p>
+                <p className={styles.introHint}>{t("journey.enter")}</p>
+              </div>
+
+              {CHAPTERS.map((c) => (
+                <article className={styles.chapter} key={c.id}>
+                  <span className={styles.chYear}>{c.year}</span>
+                  <h3 className={styles.chTitle}>{L(lang, c, "title")}</h3>
+                  <p className={styles.chPlace}>{L(lang, c, "place")}</p>
+                  <p className={styles.chStory}>{L(lang, c, "story")}</p>
+                  <p className={styles.chBridge}>
+                    <i aria-hidden="true">→</i> {L(lang, c, "bridge")}
+                  </p>
+                </article>
+              ))}
+
+              {/* chapter rail — where you are in the journey */}
+              <div className={styles.rail}>
+                <span className={styles.counter}>
+                  <b className={styles.counterNow}>01</b> /{" "}
+                  {String(CHAPTERS.length).padStart(2, "0")}
+                </span>
+                <span className={styles.ticks}>
+                  {CHAPTERS.map((c, i) => (
+                    <span
+                      className={`${styles.tick} ${i === 0 ? styles.tickOn : ""}`}
+                      key={c.id}
+                    />
+                  ))}
+                </span>
+              </div>
             </div>
-          ))}
-        </div>
 
-        <div className={styles.whiteout} aria-hidden="true" />
+            <div className={styles.whiteout} aria-hidden="true" />
+          </>
+        )}
 
-        {/* the full story, for screen readers and no-WebGL */}
-        <div className={webglOk ? styles.srOnly : styles.fallbackList}>
+        {/* ---------- the same story, readable without motion ---------- */}
+        <div className={isStatic ? styles.staticStory : styles.srOnly}>
           <h2>{t("journey.eyebrow")}</h2>
+          <p className={styles.staticLede}>{t("journey.lede")}</p>
           <ol>
-            {STAGES.map((s) => (
-              <li key={s.year}>
-                {s.year} — {t(s.key)}
+            {CHAPTERS.map((c) => (
+              <li key={c.id}>
+                <span className={styles.staticYear}>{c.year}</span>
+                <h3>{L(lang, c, "title")}</h3>
+                <p className={styles.staticPlace}>{L(lang, c, "place")}</p>
+                <p>{L(lang, c, "story")}</p>
+                <p className={styles.staticBridge}>{L(lang, c, "bridge")}</p>
               </li>
             ))}
           </ol>
