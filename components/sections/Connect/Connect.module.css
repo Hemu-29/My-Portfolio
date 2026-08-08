@@ -98,6 +98,24 @@
   border-color: rgba(255, 46, 15, 0.28);
   box-shadow: 0 44px 96px -24px rgba(20, 20, 20, 0.3), 0 0 0 5px rgba(255, 46, 15, 0.06);
 }
+/* photo panels: the image fills the frame at its own aspect ratio (cover
+   crops, never stretches) and keeps its true colour — no desaturation at
+   rest, so the photograph reads exactly as supplied. */
+.hasPhoto {
+  filter: none;
+  background: #101012;
+}
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.panel:hover .hasPhoto {
+  filter: brightness(1.03);
+}
+
 .ph {
   color: #cfcfd3;
   font-size: 22px;
@@ -177,6 +195,13 @@
 .social:hover .glyph {
   background: rgba(255, 255, 255, 0.16);
   color: #fff;
+}
+/* official brand marks (LinkedIn / GitHub / Instagram) — currentColor SVGs,
+   so the circle-fill hover inverts them exactly like the text glyphs */
+.glyph svg {
+  display: block;
+  width: 15px;
+  height: 15px;
 }
 .roll {
   display: inline-block;

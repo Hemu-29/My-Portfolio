@@ -10,8 +10,10 @@ export const PERSON = {
   jobTitle: "Product Designer & UX Consultant",
   email: "kolligireeshkumarreddy0622@gmail.com",
   location: "Antibes, France",
+  /* exact profile URLs as supplied — also consumed by JSON-LD */
   sameAs: [
-    "https://www.linkedin.com/in/gireesh-kumar-reddy-kolli-/",
+    "https://www.linkedin.com/in/gireesh-kumar-reddy-kolli-",
     "https://github.com/gireeshkumarreddy",
+    "https://www.instagram.com/itsgireeshreddy",
   ],
 };
