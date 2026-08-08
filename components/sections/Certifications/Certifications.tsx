@@ -25,48 +25,43 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger, EASE } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
+import { sceneScrub } from "@/lib/scene";
 import { CERTS } from "@/content/certifications";
 import styles from "./Certifications.module.css";
 import { useLang, L } from "@/lib/i18n";
 
-const STEP_VH = 0.85;
+/* scroll length per credential — see the note in Experience.tsx: the pinned
+   sections are kept tight so the page never feels locked */
+const STEP_VH = 0.7;
 
 /* ---------- the movement model ----------
- *   LEFT  →  CENTER  →  UP / RIGHT  →  FADE
+ *   RIGHT  →  CENTER  →  BACKGROUND
  *
- * Every panel slides in from the left, holds the centre as the active
- * credential, then leaves — alternating upward and rightward — while
- * fading. Incoming and outgoing panels move at the same time, so each
- * hand-off reads as one continuous motion rather than two slides.
- * Position is a pure function of scroll, so scrolling back runs the exact
- * same path in reverse. Offsets are percentages of the panel, so the
- * behaviour is identical at every screen size. */
-const ENTER_X = -118; /* % of panel width — where a panel waits, off-left */
-const EXIT_X = 118; /* % — rightward exit */
-const EXIT_Y = -118; /* % of panel height — upward exit */
-const ENTER_Z = -170; /* px of depth on approach, flattening to 0 at centre */
-const CULL = 1.25; /* beyond this distance the panel is off-stage */
-const TILT = 4; /* stage rotateX (unchanged) */
+ * A credential slides in from the right and takes the centre as the active
+ * hero panel. When it is passed it does NOT fly away: it recedes straight
+ * back in Z, scales down slightly and settles as a dim depth layer behind
+ * the stack — still on screen, never leaving the viewport. The next
+ * credential arrives from the right at the same time, so each hand-off is
+ * one continuous movement.
+ *
+ * Position is a pure function of scroll, so scrolling back up runs the exact
+ * same path in reverse — no snapping, no autoplay, no reset. Offsets are
+ * percentages of the panel, so behaviour is identical at every size. */
+const ENTER_X = 118; /* % of panel width — a waiting panel sits off-RIGHT */
+const ENTER_Z = -150; /* px of depth on approach, flattening to 0 at centre */
+const BACK_Z = -520; /* px — how far a passed credential recedes */
+const BACK_SCALE = 0.2; /* how much it shrinks on the way back */
+const BACK_MIN_OP = 0.18; /* it fades into the background, never to nothing */
+const CULL_IN = 1.25; /* incoming panels beyond this are off-stage */
+const CULL_BACK = 3.2; /* passed panels linger as depth layers this far back */
 
-/* per-slot base rotation, alternating like the reference deck */
-const ROT = [-9, 6, -4, 8, -6, 5, -7];
+type Panel = { kind: "cert"; index: number };
 
-type Panel =
-  | { kind: "intro" }
-  | { kind: "brand" }
-  | { kind: "cert"; index: number };
-
-/* dark → white → dark → RED → white → dark → white */
-const PANELS: Panel[] = [
-  { kind: "intro" },
-  { kind: "cert", index: 0 },
-  { kind: "cert", index: 1 },
-  { kind: "brand" },
-  { kind: "cert", index: 2 },
-  { kind: "cert", index: 3 },
-  { kind: "cert", index: 4 },
-];
-const TONE = ["dark", "light", "dark", "red", "light", "dark", "light"] as const;
+/* Every panel is a credential now — the introduction and wordmark slides
+   were removed, since the section header states both. */
+const PANELS: Panel[] = CERTS.map((_, index) => ({ kind: "cert", index }));
+/* alternating tone rhythm, kept from the deck design */
+const TONE = ["dark", "light", "dark", "light", "dark"] as const;
 
 export default function Certifications() {
   const root = useRef<HTMLElement>(null);
@@ -96,48 +91,45 @@ export default function Certifications() {
       const place = (p: number) => {
         for (let i = 0; i < n; i++) {
           const el2 = panels[i];
-          const d = i - p; /* >0 still to come · 0 centred · <0 leaving */
+          const d = i - p; /* >0 still to come · 0 centred · <0 receding */
 
-          if (d > CULL || d < -CULL) {
+          if (d > CULL_IN || d < -CULL_BACK) {
             el2.style.visibility = "hidden";
             continue;
           }
           el2.style.visibility = "visible";
 
-          /* the reference's scattered-slide tilt — static per panel */
-          const roll = ROT[i % ROT.length] * 0.25;
-
           let x = 0;
-          let y = 0;
           let z = 0;
           let op = 1;
           let sc = 1;
 
           if (d >= 0) {
-            /* LEFT → CENTER */
-            const t = Math.min(d, CULL);
+            /* RIGHT → CENTER */
+            const t = Math.min(d, CULL_IN);
             x = ENTER_X * t;
             z = ENTER_Z * t;
             sc = 1 - 0.05 * t;
             op = 1 - Math.max(0, t - 0.5) / 0.62; /* fades up as it arrives */
           } else {
-            /* CENTER → UP or RIGHT, alternating, fading out */
-            const t = Math.min(CULL, -d);
-            if (i % 2 === 1) y = EXIT_Y * t;
-            else x = EXIT_X * t;
-            z = -70 * t;
-            sc = 1 - 0.04 * t;
-            op = 1 - t / 0.85;
+            /* CENTER → BACKGROUND: straight back, no lateral drift, and it
+               stays on screen as a depth layer instead of exiting */
+            const t = Math.min(CULL_BACK, -d);
+            const e = 1 - Math.pow(1 - Math.min(t, 1), 2); /* ease the first step */
+            z = BACK_Z * (e + Math.max(0, t - 1) * 0.28);
+            sc = 1 - BACK_SCALE * (e + Math.max(0, t - 1) * 0.12);
+            op = Math.max(BACK_MIN_OP, 1 - e * 0.68 - Math.max(0, t - 1) * 0.06);
           }
 
+          /* panels are straight rectangles — no roll, no skew */
           el2.style.transform =
-            `translate3d(${x.toFixed(2)}%, ${y.toFixed(2)}%, ${z.toFixed(1)}px)` +
-            ` rotate(${roll.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
+            `translate3d(${x.toFixed(2)}%, 0%, ${z.toFixed(1)}px)` +
+            ` scale(${sc.toFixed(3)})`;
           el2.style.opacity = String(gsap.utils.clamp(0, 1, op));
           el2.style.filter = "";
-          /* the leaving panel rides above the centre one so its exit reads;
-             the arriving panel sits behind until it takes the centre */
-          el2.style.zIndex = d < 0 ? "210" : String(200 - Math.round(d * 20));
+          /* the active credential is the hero: everything else, arriving or
+             receded, sits behind it */
+          el2.style.zIndex = String(200 - Math.round(Math.abs(d) * 20));
         }
         setActive(Math.round(gsap.utils.clamp(0, n - 1, p)));
       };
@@ -153,11 +145,10 @@ export default function Certifications() {
       gsap.ticker.add(tick);
       place(0);
 
+      /* The Scene's sticky hold already pins this section, so no `pin` here —
+         this trigger only reads progress across the scene's runway. */
       const st = ScrollTrigger.create({
-        trigger: el,
-        start: "top top",
-        end: () => `+=${n * window.innerHeight * STEP_VH}`,
-        pin: true,
+        ...sceneScrub(el),
         scrub: 0.5,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
@@ -178,20 +169,8 @@ export default function Certifications() {
         handlers.push([pnl, h]);
       });
 
-      /* very subtle perspective response */
-      const stage = el.querySelector<HTMLElement>(`.${styles.stage}`);
-      let rx: ReturnType<typeof gsap.quickTo> | null = null;
-      let ry: ReturnType<typeof gsap.quickTo> | null = null;
-      if (stage) {
-        rx = gsap.quickTo(stage, "rotationX", { duration: 1, ease: "power3.out" });
-        ry = gsap.quickTo(stage, "rotationY", { duration: 1, ease: "power3.out" });
-      }
-      const onMove = (e: PointerEvent) => {
-        const r = el.getBoundingClientRect();
-        rx?.(TILT - ((e.clientY - r.top) / r.height - 0.5) * 3.4);
-        ry?.(((e.clientX - r.left) / r.width - 0.5) * 3.6);
-      };
-      el.addEventListener("pointermove", onMove);
+      /* No pointer-driven rotation: credential panels stay square to the
+         viewer. Depth comes only from Z, scale and opacity. */
 
       gsap.from(`.${styles.foot} > *`, {
         y: 18,
@@ -199,13 +178,13 @@ export default function Certifications() {
         duration: 0.8,
         ease: EASE.outExpo,
         stagger: 0.08,
+        immediateRender: false,
         scrollTrigger: { trigger: el, start: "top 74%" },
       });
 
       return () => {
         gsap.ticker.remove(tick);
         st.kill();
-        el.removeEventListener("pointermove", onMove);
         handlers.forEach(([e2, h]) => e2.removeEventListener("click", h));
         el.classList.remove(styles.deckMode);
       };
@@ -219,6 +198,7 @@ export default function Certifications() {
           autoAlpha: 0,
           duration: 0.85,
           ease: EASE.outExpo,
+          immediateRender: false,
           scrollTrigger: { trigger: p, start: "top 88%" },
         });
       });
@@ -229,60 +209,48 @@ export default function Certifications() {
 
   return (
     <section className={styles.certs} id="certifications" ref={root}>
-      {/* No header floats over the panels — as in the reference, the only
-          surrounding UI is the deck footer strip below. */}
+      {/* The section now names itself, so the deck no longer needs an
+          introduction slide standing in for a heading. */}
+      <div className={styles.head}>
+        <p className={styles.eyebrow}>
+          <span>06</span> {t("cert.eyebrow")}
+        </p>
+        <h2 className={styles.h2}>{t("cert.h2")}</h2>
+        <p className={styles.lede}>{t("cert.lede")}</p>
+      </div>
+
       <div className={styles.stageWrap}>
         <div className={styles.stage}>
           {PANELS.map((p, i) => {
-            const tone = TONE[i];
+            const tone = TONE[i % TONE.length];
             const cls = `${styles.panel} ${styles[tone]} ${i === 0 ? styles.on : ""}`;
-
-            if (p.kind === "intro") {
-              return (
-                <article className={cls} key="intro" style={{ zIndex: 200 - i }}>
-                  <div className={styles.band}>
-                    <span className={styles.no}>1.1</span>
-                    <span className={styles.org}>{t("cert.introLabel")}</span>
-                  </div>
-                  <h3 className={styles.title}>
-                    {t("cert.introTitle1")}
-                    <br />
-                    {t("cert.introTitle2")}
-                  </h3>
-                  <div className={styles.detail}>
-                    <div className={styles.cols}>
-                      <p>{t("cert.introBody")}</p>
-                      <p className={styles.muted}>{t("cert.introNote")}</p>
-                    </div>
-                  </div>
-                </article>
-              );
-            }
-
-            if (p.kind === "brand") {
-              return (
-                <article className={cls} key="brand" style={{ zIndex: 200 - i }}>
-                  <div className={styles.band}>
-                    <span className={styles.no}>—</span>
-                    <span className={styles.org}>{t("cert.brandRole")}</span>
-                  </div>
-                  <span className={styles.wordmark}>Gireesh</span>
-                  <span className={styles.vert}>CERTIFICATIONS · 2026</span>
-                </article>
-              );
-            }
 
             const c = CERTS[p.index];
             return (
               <article className={cls} key={c.title} style={{ zIndex: 200 - i }}>
+                {/* credential header: what kind of thing this is, who issued
+                    it, and whether it can be verified */}
                 <div className={styles.band}>
                   <span className={styles.no}>{c.no}</span>
-                  {/* issuing organisation — the credibility line */}
-                  <span className={styles.issuer}>
-                    {c.issuer ? `${c.issuer} · ${t("cert.certification")}` : t("cert.issuerTBC")}
-                  </span>
+                  <span className={styles.kind}>{t("cert.certification")}</span>
                   <span className={`${styles.status} ${c.verified ? styles.ok : ""}`}>
                     {c.verified ? t("cert.verified") : t("cert.onRequest")}
+                  </span>
+                </div>
+
+                {/* the issuer, stated large — official mark where supplied */}
+                <div className={styles.issuerRow}>
+                  {c.logo ? (
+                    <span className={styles.logoPlate}>
+                      <img
+                        src={c.logo.src}
+                        alt={c.issuer ?? ""}
+                        style={{ aspectRatio: c.logo.aspect }}
+                      />
+                    </span>
+                  ) : null}
+                  <span className={styles.issuerName}>
+                    {c.issuer ? `${c.issuer} ${t("cert.certified")}` : t("cert.issuerTBC")}
                   </span>
                 </div>
 
@@ -348,7 +316,9 @@ export default function Certifications() {
         <span className={styles.brandFoot}>
           <b>06</b> Gireesh
         </span>
-        <span className={styles.count}>01 / 07</span>
+        <span className={styles.count}>
+          01 / {String(PANELS.length).padStart(2, "0")}
+        </span>
         <span className={styles.footLbl}>{t("cert.foot")}</span>
       </div>
     </section>

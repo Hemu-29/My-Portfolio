@@ -13,26 +13,25 @@
 }
 .deckMode {
   height: 100svh;
-  min-height: 600px;
-  padding: 68px 0 0;
+  min-height: 640px;
+  padding: 46px 0 0;
   display: flex;
   flex-direction: column;
 }
 
-/* ---------- minimal surrounding UI, as in the reference ---------- */
+/* ---------- section heading: the section names itself ---------- */
 .head {
-  position: absolute; /* lifted out of flow so the orbit owns the viewport */
-  top: 26px;
-  left: 0;
-  right: 0;
+  position: relative;
   z-index: 6;
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 44px;
+  text-align: center;
   pointer-events: none;
+  flex: 0 0 auto;
 }
 .eyebrow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 12px;
   font-size: 11px;
@@ -43,6 +42,67 @@
 }
 .eyebrow span {
   color: var(--accent);
+}
+.h2 {
+  margin-top: 12px;
+  font-weight: 900;
+  font-size: clamp(38px, 6vw, 84px);
+  letter-spacing: -0.04em;
+  line-height: 0.94;
+  text-transform: uppercase;
+  color: #141414;
+}
+.lede {
+  margin: 14px auto 0;
+  max-width: 620px;
+  font-size: clamp(13.5px, 1.15vw, 16px);
+  line-height: 1.55;
+  color: #5c5c63;
+  text-wrap: pretty;
+}
+
+/* Short viewports: the heading gives room back to the credential panel
+   rather than squeezing the panel's own content. */
+@media (max-height: 800px) {
+  .deckMode {
+    padding-top: 30px;
+  }
+  .h2 {
+    margin-top: 8px;
+    font-size: clamp(30px, 4.6vh, 52px);
+  }
+  .lede {
+    margin-top: 9px;
+    font-size: 13px;
+    max-width: 520px;
+  }
+  /* the heading now costs less, so the panel reclaims that height.
+     `.deckMode` prefix keeps this ahead of the base .stage rule below. */
+  .deckMode .stage {
+    --panel-w: clamp(340px, min(58vw, calc((100vh - 270px) * 1.6)), 980px);
+  }
+  /* and the panel's own rhythm tightens so the record still fits */
+  .band {
+    height: 40px;
+  }
+  .issuerRow {
+    margin-bottom: 8px;
+  }
+  .record {
+    margin-bottom: 10px;
+    padding-bottom: 9px;
+  }
+  .skills li {
+    padding: 2px 0;
+  }
+}
+@media (max-height: 680px) {
+  .lede {
+    display: none; /* the heading alone still names the section */
+  }
+  .deckMode .stage {
+    --panel-w: clamp(340px, min(58vw, calc((100vh - 215px) * 1.6)), 980px);
+  }
 }
 
 /* ---------- the cascade ---------- */
@@ -59,22 +119,20 @@
 }
 .stage {
   position: relative;
-  /* the stage IS the focused panel; the others orbit around its centre */
-  --panel-w: clamp(360px, min(58vw, calc((100vh - 404px) * 1.6)), 1000px);
+  /* the stage IS the focused panel; the others recede behind its centre */
+  --panel-w: clamp(340px, min(58vw, calc((100vh - 430px) * 1.6)), 980px);
   width: var(--panel-w);
   height: calc(var(--panel-w) * 0.625);
   transform-style: preserve-3d;
-  /* panels now arrive from the left, so no headroom offset is needed —
-     the active panel sits properly centred */
-  transform: rotateX(4deg);
+  /* square to the viewer — no stage tilt, no warped perspective */
   will-change: transform;
 }
 
-/* 16:10 slide panels with the reference's soft radius */
+/* clean rectangular credential panels, straight edges, subtle radius */
 .panel {
   position: absolute;
-  inset: 0; /* every panel fills the stage; the orbit moves it from there */
-  border-radius: 14px;
+  inset: 0; /* every panel fills the stage; the motion moves it from there */
+  border-radius: 10px;
   backface-visibility: hidden;
   padding: 0 clamp(26px, 3vw, 44px) clamp(22px, 2.6vh, 34px);
   display: flex;
@@ -103,18 +161,56 @@
 /* ---------- identity band: stays in the exposed upper area ---------- */
 .band {
   flex: 0 0 auto;
-  height: 54px;
-  /* held to the left of the panel: a narrower run of text drifts far less
-     vertically when the panel is rotated, keeping it inside its own strip */
-  max-width: 52%;
+  height: 50px;
+  /* panels are square now, so the band can run the full width */
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   white-space: nowrap;
+}
+/* "CERTIFICATION" — states plainly what the panel is */
+.kind {
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  opacity: 0.62;
+}
+
+/* ---------- issuer: the largest thing after the title ---------- */
+.issuerRow {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: clamp(10px, 1.4vh, 18px);
+}
+/* official marks always sit on a light plate so brand colours stay true
+   on dark and light panels alike */
+.logoPlate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(32px, 4.4vh, 44px);
+  padding: 0 12px;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(20, 20, 20, 0.14);
+}
+.logoPlate img {
+  height: clamp(15px, 2.1vh, 21px);
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+.issuerName {
+  font-size: clamp(15px, 1.7vw, 24px);
+  font-weight: 800;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  line-height: 1.1;
 }
 .no {
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -174,12 +270,12 @@
   padding-bottom: 2px;
 }
 
-/* oversized condensed title, reference scale */
+/* the certification's own name */
 .title {
-  font-size: clamp(30px, 4.2vw, 62px);
+  font-size: clamp(22px, 3vw, 44px);
   font-weight: 900;
-  letter-spacing: -0.035em;
-  line-height: 0.94;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
   text-transform: uppercase;
 }
 
