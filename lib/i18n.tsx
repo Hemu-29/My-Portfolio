@@ -13,7 +13,7 @@ import {
   type ReactNode,
 } from "react";
 
-export type Lang = "en";
+export type Lang = "en" | "fr";
 
 type Entry = { en: string; fr: string };
 

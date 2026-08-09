@@ -144,12 +144,10 @@ export const PROJECTS: Project[] = [
       decisions: [
         {
           title: "Flutter for cross-platform parity",
-          body: "",
           why: "A single Flutter codebase targeting both iOS and Android ensured consistent UX and halved the development time compared to separate native apps.",
         },
         {
           title: "Offline-first with SQLite",
-          body: "",
           why: "Campus networks are unreliable. SQLite syncs when online and serves cached data offline — students can always access schedules and attendance records regardless of connectivity.",
         },
       ],
