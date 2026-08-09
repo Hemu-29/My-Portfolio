@@ -27,6 +27,7 @@ import { gsap, ScrollTrigger, EASE } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
 import { sceneScrub } from "@/lib/scene";
 import { CERTS } from "@/content/certifications";
+import { assetPath } from "@/lib/site";
 import styles from "./Certifications.module.css";
 import { useLang, L } from "@/lib/i18n";
 
@@ -243,7 +244,7 @@ export default function Certifications() {
                   {c.logo ? (
                     <span className={styles.logoPlate}>
                       <img
-                        src={c.logo.src}
+                        src={assetPath(c.logo.src)}
                         alt={c.issuer ?? ""}
                       />
                     </span>

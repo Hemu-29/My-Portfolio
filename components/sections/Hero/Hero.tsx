@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap, prefersReducedMotion, EASE } from "@/lib/gsap";
 import Button from "@/components/ui/Button";
 import VelocityMarquee from "@/components/ui/VelocityMarquee";
+import { assetPath } from "@/lib/site";
 import styles from "./Hero.module.css";
 import { useLang } from "@/lib/i18n";
 
@@ -159,7 +160,7 @@ export default function Hero() {
           <Button href="#work" variant="primary" arrow>
             {t("hero.cta1")}
           </Button>
-          <Button href="/HemanthAnde_Resume.pdf" variant="ghost" lead={<span className={styles.play}>↓</span>}>
+          <Button href={assetPath("/HemanthAnde_Resume.pdf")} variant="ghost" lead={<span className={styles.play}>↓</span>}>
             {t("hero.cta2")}
           </Button>
         </div>

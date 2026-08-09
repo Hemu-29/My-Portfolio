@@ -5,6 +5,22 @@
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
+const basePath =
+  process.env.NEXT_PUBLIC_BASE_PATH ??
+  (process.env.NODE_ENV === "production" ? "/My-Portfolio" : "");
+
+export function assetPath(path?: string | null): string {
+  if (!path) return "";
+  if (
+    path.startsWith("http://") ||
+    path.startsWith("https://") ||
+    path.startsWith("data:")
+  )
+    return path;
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  return `${basePath}${cleanPath}`;
+}
+
 export const PERSON = {
   name: "Hemanth Ande",
   jobTitle: "AI & Full Stack Developer",

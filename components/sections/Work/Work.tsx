@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { gsap, ScrollTrigger, prefersReducedMotion, EASE } from "@/lib/gsap";
 import { sceneScrub } from "@/lib/scene";
 import { PROJECTS } from "@/content/projects";
+import { assetPath } from "@/lib/site";
 import styles from "./Work.module.css";
 import { useLang, L } from "@/lib/i18n";
 
@@ -122,7 +123,7 @@ export default function Work() {
                   {p.cover?.src && p.cover.variant === "photo" ? (
                     <img
                       className={styles.coverPhoto}
-                      src={p.cover.src}
+                      src={assetPath(p.cover.src)}
                       alt={p.coverLabel}
                       style={p.cover.focus ? { objectPosition: p.cover.focus } : undefined}
                       loading="lazy"
@@ -130,7 +131,7 @@ export default function Work() {
                   ) : p.cover?.src ? (
                     <img
                       className={styles.coverBrand}
-                      src={p.cover.src}
+                      src={assetPath(p.cover.src)}
                       alt={p.coverLabel}
                       style={{ aspectRatio: p.cover.aspect ?? 1 }}
                       loading="lazy"

@@ -12,6 +12,7 @@ import Link from "next/link";
 import { PROJECTS } from "@/content/projects";
 import LanguageToggle from "@/components/layout/LanguageToggle";
 import { useLang, L } from "@/lib/i18n";
+import { assetPath } from "@/lib/site";
 import styles from "./case.module.css";
 
 export default function CaseView({ slug }: { slug: string }) {
@@ -108,7 +109,7 @@ export default function CaseView({ slug }: { slug: string }) {
               {project.cover.src && project.cover.variant === "photo" ? (
                 <img
                   className={styles.coverPhoto}
-                  src={project.cover.src}
+                  src={assetPath(project.cover.src)}
                   alt={project.coverLabel}
                   style={
                     project.cover.focus ? { objectPosition: project.cover.focus } : undefined
@@ -117,7 +118,7 @@ export default function CaseView({ slug }: { slug: string }) {
               ) : project.cover.src ? (
                 <img
                   className={styles.coverBrand}
-                  src={project.cover.src}
+                  src={assetPath(project.cover.src)}
                   alt={project.coverLabel}
                   style={{ aspectRatio: project.cover.aspect ?? 1 }}
                 />
