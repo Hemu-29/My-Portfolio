@@ -266,7 +266,10 @@
     height: 268px;
   }
 }
-@media (max-width: 820px) {
+/* Promoted from 820px: five 172px panels plus four 26px gaps need ~964px, so
+   between 821 and 963px the outer two were cropped by the viewport edge. The
+   arc drops to three panels for the whole mobile range instead. */
+@media (max-width: 1000px) {
   .connect {
     padding-top: 100px;
   }

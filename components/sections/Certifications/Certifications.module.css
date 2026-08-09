@@ -440,6 +440,20 @@
     padding: 0 24px;
     --panel-w: 100%;
   }
+  /* The band is one nowrap row (number · CERTIFICATION · status) that needs
+     ~360px. Inside a phone-width panel it was clipped, taking the
+     verification status off the right edge of every credential. Let it wrap
+     and give it room. */
+  .band {
+    height: auto;
+    min-height: 40px;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding-top: 4px;
+  }
+  .status {
+    margin-left: 0;
+  }
   .panel {
     position: relative !important;
     height: auto;

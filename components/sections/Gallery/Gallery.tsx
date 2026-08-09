@@ -135,22 +135,24 @@ export default function Gallery() {
       },
     });
 
-    /* pointer parallax — the whole wall leans */
+    /* Pointer parallax — the whole wall leans. Mouse only: on a touch screen
+       `pointermove` fires while dragging, so every swipe used to lurch the
+       wall sideways and fight the scroll. A finger is not a hovering cursor. */
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const wall = el.querySelector<HTMLElement>(`.${styles.wall}`);
-    let px: ReturnType<typeof gsap.quickTo> | null = null;
-    let py: ReturnType<typeof gsap.quickTo> | null = null;
-    if (wall) {
-      px = gsap.quickTo(wall, "x", { duration: 1.2, ease: "power3.out" });
-      py = gsap.quickTo(wall, "y", { duration: 1.2, ease: "power3.out" });
+    let onMove: ((e: PointerEvent) => void) | null = null;
+    if (wall && finePointer) {
+      const px = gsap.quickTo(wall, "x", { duration: 1.2, ease: "power3.out" });
+      const py = gsap.quickTo(wall, "y", { duration: 1.2, ease: "power3.out" });
+      onMove = (e: PointerEvent) => {
+        const r = el.getBoundingClientRect();
+        const cx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        const cy = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        px(cx * 30 * PARALLAX);
+        py(cy * 20 * PARALLAX);
+      };
+      el.addEventListener("pointermove", onMove);
     }
-    const onMove = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
-      const cx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-      const cy = ((e.clientY - r.top) / r.height - 0.5) * 2;
-      px?.(cx * 30 * PARALLAX);
-      py?.(cy * 20 * PARALLAX);
-    };
-    el.addEventListener("pointermove", onMove);
 
     /* The title must NEVER depend on a scroll trigger firing. A `gsap.from`
        with autoAlpha immediately hides the element and only restores it when
@@ -177,7 +179,7 @@ export default function Gallery() {
       io.disconnect();
       ro.disconnect();
       st.kill();
-      el.removeEventListener("pointermove", onMove);
+      if (onMove) el.removeEventListener("pointermove", onMove);
     };
   }, [cols]);
 

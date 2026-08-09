@@ -98,7 +98,13 @@ export default function LightJourney() {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) setStaticMode(true);
-    const compact = window.matchMedia("(max-width: 700px)").matches;
+    /* Aligned to the site's real mobile boundary (1000px) and to coarse
+       pointers. At 700px a landscape phone or an 8-inch tablet fell through
+       to the desktop tier: 20 antialiased cables at DPR 2 in a continuous
+       loop across a six-viewport hold. */
+    const compact = window.matchMedia(
+      "(max-width: 1000px), (hover: none) and (pointer: coarse)"
+    ).matches;
     const CABLES = compact ? 10 : 20;
     const DPR_CAP = compact ? 1.5 : 2;
 

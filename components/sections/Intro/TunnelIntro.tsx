@@ -74,7 +74,11 @@ export default function TunnelIntro({ text = "GIREESH" }: { text?: string }) {
     if (!rootEl || !frame || !canvas) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const compact = window.matchMedia("(max-width: 700px)").matches;
+    /* same boundary as the rest of the site — a landscape phone must not get
+       the desktop tunnel density */
+    const compact = window.matchMedia(
+      "(max-width: 1000px), (hover: none) and (pointer: coarse)"
+    ).matches;
 
     /* mobile density reduction */
     const GRID = compact ? 3 : 4;

@@ -158,8 +158,8 @@
     transform: translate(-50%, -50%) scale(1);
   }
 }
-@media (hover: none) {
-  .fill {
-    display: none;
-  }
-}
+/* NOTE: there is deliberately no `@media (hover: none) { .fill { display: none } }`
+   here. That rule used to exist and silently defeated the tap-driven fill
+   above — worse, the label still rolled to its white clone, so a pressed
+   ghost button rendered white text on a fill that never appeared. Touch gets
+   the same fill as hover, driven by :active. */

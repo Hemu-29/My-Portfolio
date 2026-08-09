@@ -80,6 +80,10 @@ export default function About() {
             gsap.utils.toArray<HTMLElement>("[data-metric-count]").forEach((numEl) => {
               const target = Number(numEl.dataset.metricCount);
               const obj = { v: 0 };
+              /* the markup ships the real number, so it is correct with no JS
+                 at all; the count-up rewinds to zero only at the moment it is
+                 actually about to run */
+              numEl.textContent = "0";
               gsap.to(obj, {
                 v: target,
                 duration: 1.4,
@@ -125,7 +129,10 @@ export default function About() {
                 {m.count !== null ? (
                   <>
                     {"prefix" in m && m.prefix}
-                    <span data-metric-count={m.count}>0</span>
+                    {/* ships the real number: with reduced motion (or no JS)
+                        the count-up never runs, and a hardcoded 0 here left
+                        those users reading "0+" and "$0K+" permanently */}
+                    <span data-metric-count={m.count}>{m.count}</span>
                     <i>{m.suffix}</i>
                   </>
                 ) : (

@@ -335,7 +335,10 @@
   }
 }
 
-@media (max-width: 700px) {
+/* Promoted from 700px to the site's real mobile boundary: between 701 and
+   1000px the layout is already mobile, yet chapters were still animating a
+   blur filter over the live WebGL canvas. */
+@media (max-width: 1000px) {
   .chapter {
     width: 90vw;
     /* blur costs more than it gives on mobile GPUs */

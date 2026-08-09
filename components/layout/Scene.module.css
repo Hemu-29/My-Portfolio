@@ -70,3 +70,34 @@
     display: block;
   }
 }
+
+/* ============ REDUCED MOTION ============
+   Sections that are scroll-driven fall back to a static, fully-written-out
+   layout when motion is reduced — the Journey prints all six chapters, the
+   Gallery prints its wall. Those layouts are thousands of pixels tall, so a
+   held 100svh frame with overflow:hidden would show only the first screen of
+   each and leave the rest permanently unreachable, while the runway scrolled
+   past as blank viewports.
+
+   So with reduced motion the entire stack releases: every scene becomes an
+   ordinary block, every runway collapses, and the page is a plain complete
+   document. A cinematic stack is a motion effect, and this is exactly the
+   user who asked not to have one. */
+@media (prefers-reduced-motion: reduce) {
+  .hold,
+  .keepFrame {
+    position: static;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+    isolation: auto;
+  }
+  .hold > *,
+  .keepFrame > * {
+    height: auto;
+  }
+  .runway,
+  .keepRunway {
+    display: none;
+  }
+}

@@ -201,7 +201,9 @@
   }
 }
 
-@media (max-width: 700px) {
+/* the site treats <=1000px as mobile; glassmorphism on 23 continuously
+   orbiting cards is the single heaviest effect on the page */
+@media (max-width: 1000px) {
   .section {
     min-height: 600px;
   }

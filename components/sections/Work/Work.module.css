@@ -300,8 +300,15 @@
   justify-self: end;
 }
 
-/* ============ Touch / small screens: native snap row ============ */
-@media (max-width: 1100px) {
+/* ============ Touch / small screens / reduced motion: native snap row ======
+   The reduced-motion clause is load-bearing and must mirror the JS gate in
+   Work.tsx exactly. The desktop arc only runs under
+   `(min-width: 1101px) and (prefers-reduced-motion: no-preference)`, and the
+   fallback branch positions nothing — so a reduced-motion viewport WIDER than
+   1100px used to get the base `position: absolute` cards with no JS ever
+   spreading them: all 14 stacked in one pile at the centre of the track, with
+   only the topmost reachable. */
+@media (max-width: 1100px), (prefers-reduced-motion: reduce) {
   .work {
     min-height: 0;
     padding: 80px 0 0;
@@ -345,8 +352,12 @@
     justify-items: center;
     padding: 6px 24px 30px;
   }
+  /* The dots track the arc's active card, and the arc doesn't run here — the
+     snap row is scrolled by thumb. Left visible they sat frozen on card one
+     forever, so they go with the counter and the hint. */
   .count,
-  .hint {
+  .hint,
+  .dots {
     display: none;
   }
 }

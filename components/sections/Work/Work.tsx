@@ -89,19 +89,11 @@ export default function Work() {
       return () => st.kill();
     });
 
-    /* touch & reduced motion: reveal cards as the row enters */
-    mm.add("(max-width: 1100px), (prefers-reduced-motion: reduce)", () => {
-      if (prefersReducedMotion()) return;
-      gsap.from(`.${styles.card}`, {
-        y: 40,
-        autoAlpha: 0,
-        duration: 0.9,
-        ease: EASE.outExpo,
-        stagger: 0.07,
-        immediateRender: false,
-        scrollTrigger: { trigger: el, start: "top 75%" },
-      });
-    });
+    /* Touch & reduced motion: the snap row needs no JS. The reveal tween that
+       used to live here could never run — the snap-row CSS pins the cards with
+       `transform: none !important; opacity: 1 !important`, which inline GSAP
+       styles cannot beat — so it was dead code that only risked flashing the
+       cards through a hidden state. The row simply renders. */
 
     return () => mm.revert();
   }, []);

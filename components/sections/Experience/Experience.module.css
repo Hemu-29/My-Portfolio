@@ -430,9 +430,12 @@
   color: var(--ink-3);
 }
 
-/* short viewports: the panel has less room, so the secondary detail steps
-   aside rather than being clipped — summary, impact and skills remain */
-@media (max-height: 820px) {
+/* Short DESKTOP viewports: the pinned board has less room, so the secondary
+   detail steps aside rather than being clipped — summary, impact and skills
+   remain. The min-width guard is essential: without it this matched every
+   phone (a 375x812 iPhone is under 820px tall) and hid the achievements on
+   mobile, where boards are auto-height in normal flow with room to spare. */
+@media (max-height: 820px) and (min-width: 1001px) {
   .list {
     display: none;
   }
