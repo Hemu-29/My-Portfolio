@@ -8,6 +8,8 @@
  */
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { gsap, ScrollTrigger, prefersReducedMotion, EASE } from "@/lib/gsap";
 import { sceneScrub } from "@/lib/scene";
 import { PROJECTS } from "@/content/projects";
@@ -15,16 +17,13 @@ import styles from "./Work.module.css";
 import { useLang, L } from "@/lib/i18n";
 
 const SPREAD = 330; /* px between card centers on the arc */
-/* Scroll px per card. With 14 projects this is the page's longest pin, so
-   the step is kept tight — enough for each card to land at centre, without
-   turning the section into a corridor. */
 const PIN_PER_CARD = 210;
 
-/* two-digit counter — the collection is past nine projects */
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export default function Work() {
   const root = useRef<HTMLElement>(null);
+  const router = useRouter();
   const { t, lang } = useLang();
 
   useEffect(() => {
@@ -45,14 +44,9 @@ export default function Work() {
           const ad = Math.abs(d);
           gsap.set(card, {
             x: d * SPREAD,
-            y: Math.min(ad * ad * 9, 110),
+            y: -30 + Math.min(ad * ad * 6, 50),
             rotationY: gsap.utils.clamp(-34, 34, -d * 10),
             scale: 1 - Math.min(ad * 0.065, 0.38),
-            /* Depth is carried by position, scale and rotation — NOT by
-               dimming. The cards on screen (roughly ad <= 2) stay fully
-               opaque so every cover reads at its true brightness; only
-               cards already travelling off the viewport edge fade, and
-               only enough to soften the exit. */
             autoAlpha: ad <= 2 ? 1 : Math.max(0.55, 1 - (ad - 2) * 0.22),
             zIndex: Math.round(100 - ad * 10),
           });
@@ -66,8 +60,6 @@ export default function Work() {
 
       render(0);
 
-      /* the Scene's sticky hold does the pinning; this only reads progress
-         across the scene's runway (see lib/scene.ts) */
       const st = ScrollTrigger.create({
         ...sceneScrub(el),
         scrub: 0.65,
@@ -75,7 +67,6 @@ export default function Work() {
         onUpdate: (self) => render(self.progress * (n - 1)),
       });
 
-      /* header reveal, once, on pin start */
       gsap.from(`.${styles.header} > *`, {
         y: 40,
         autoAlpha: 0,
@@ -88,12 +79,6 @@ export default function Work() {
 
       return () => st.kill();
     });
-
-    /* Touch & reduced motion: the snap row needs no JS. The reveal tween that
-       used to live here could never run — the snap-row CSS pins the cards with
-       `transform: none !important; opacity: 1 !important`, which inline GSAP
-       styles cannot beat — so it was dead code that only risked flashing the
-       cards through a hidden state. The row simply renders. */
 
     return () => mm.revert();
   }, []);
@@ -119,8 +104,13 @@ export default function Work() {
       <div className={styles.stage}>
         <div className={styles.track}>
           {PROJECTS.map((p, i) => (
-            <article className={styles.card} key={p.slug} style={{ zIndex: 100 - i }}>
-              <a className={styles.inner} href={`/work/${p.slug}`}>
+            <article
+              className={styles.card}
+              key={p.slug}
+              style={{ zIndex: 100 - i }}
+              onClick={() => router.push(`/work/${p.slug}`)}
+            >
+              <Link className={styles.inner} href={`/work/${p.slug}`}>
                 <div
                   className={styles.cover}
                   style={
@@ -130,7 +120,6 @@ export default function Work() {
                   }
                 >
                   {p.cover?.src && p.cover.variant === "photo" ? (
-                    /* his own capture of the built site — full-bleed */
                     <img
                       className={styles.coverPhoto}
                       src={p.cover.src}
@@ -139,7 +128,6 @@ export default function Work() {
                       loading="lazy"
                     />
                   ) : p.cover?.src ? (
-                    /* verified brand mark, sized by its true aspect ratio */
                     <img
                       className={styles.coverBrand}
                       src={p.cover.src}
@@ -171,10 +159,7 @@ export default function Work() {
                     </span>
                   </div>
                 </div>
-              </a>
-              {/* verified destination — a sibling of the card link, so the
-                  anchors never nest; sits over the cover's top-right. Live
-                  site wins when a project has both. */}
+              </Link>
               {(p.site || p.repo) && (
                 <a
                   className={styles.siteChip}
@@ -182,6 +167,7 @@ export default function Work() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`${p.site ? p.site.label : "GitHub"} ↗`}
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {p.site ? p.site.label : "GitHub"} <i aria-hidden="true">↗</i>
                 </a>

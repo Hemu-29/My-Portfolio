@@ -37,7 +37,7 @@ export default function CaseView({ slug }: { slug: string }) {
             page — a shared case-study link is often a visitor's first screen */}
         <div className={styles.barRight}>
           <Link href="/" className={styles.logo}>
-            GIREESH<i>.</i>
+            HEMANTH<i>.</i>
           </Link>
           <LanguageToggle />
         </div>

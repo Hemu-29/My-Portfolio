@@ -21,7 +21,7 @@ export async function generateMetadata({
   const project = PROJECTS.find((p) => p.slug === slug);
   if (!project) return {};
   return {
-    title: `${project.title} — Case Study · Gireesh`,
+    title: `${project.title} — Case Study · Hemanth`,
     description: project.oneLiner,
   };
 }

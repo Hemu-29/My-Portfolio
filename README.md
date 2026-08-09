@@ -1,14 +1,10 @@
-# Gireesh — Portfolio
+# Hemanth — Portfolio
 
-Personal portfolio of **Gireesh Kumar Reddy Kolli**, Product Designer & UX
-Consultant (Antibes, France). A single-page cinematic experience: full-screen
-scenes stacked on top of each other, each one rising over the last as you
-scroll, with scroll-driven set pieces inside them.
+Personal portfolio of **Hemanth Ande**, AI & Full Stack Developer.
+Designed with smooth GSAP animations, 3D scenes, light/dark themes, and interactive project showcases.
 
-**Live product work:** [myheeding.com](https://www.myheeding.com/en) ·
-**Profiles:** [LinkedIn](https://www.linkedin.com/in/gireesh-kumar-reddy-kolli-) ·
-[GitHub](https://github.com/gireeshkumarreddy) ·
-[Instagram](https://www.instagram.com/itsgireeshreddy)
+**Profiles:** [LinkedIn](https://www.linkedin.com/in/hemanth-ande-0265a2330/) ·
+[GitHub](https://github.com/Hemu-29)
 
 ## Stack
 

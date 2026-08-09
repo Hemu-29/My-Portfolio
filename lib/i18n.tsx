@@ -1,15 +1,8 @@
 "use client";
 
 /*
- * Centralised EN/FR store for every user-facing string on the site.
- *
- * Switching is pure React state: scroll position, the active section and all
- * pinned ScrollTriggers survive, with no reload. The choice persists in
- * localStorage and is mirrored onto <html lang> for assistive tech.
- *
- * Proper nouns (companies, products, tools, place names) are deliberately
- * NOT translated. French runs longer than English, so copy here is written
- * to fit the same layout rather than translated literally.
+ * Centralised EN string store for every user-facing string on the site.
+ * (French translations removed — replaced with Hemanth Ande's English content)
  */
 
 import {
@@ -20,206 +13,206 @@ import {
   type ReactNode,
 } from "react";
 
-export type Lang = "en" | "fr";
+export type Lang = "en";
 
 type Entry = { en: string; fr: string };
 
 export const DICT: Record<string, Entry> = {
   /* ---------------- nav ---------------- */
-  "nav.home": { en: "Home", fr: "Accueil" },
-  "nav.about": { en: "About", fr: "À propos" },
-  "nav.work": { en: "Work", fr: "Projets" },
+  "nav.home": { en: "Home", fr: "Home" },
+  "nav.about": { en: "About", fr: "About" },
+  "nav.work": { en: "Work", fr: "Work" },
+  "nav.experience": { en: "Experience", fr: "Experience" },
   "nav.contact": { en: "Contact", fr: "Contact" },
-  "nav.menu": { en: "Open menu", fr: "Ouvrir le menu" },
-  "nav.close": { en: "Close menu", fr: "Fermer le menu" },
+  "nav.menu": { en: "Open menu", fr: "Open menu" },
+  "nav.close": { en: "Close menu", fr: "Close menu" },
 
   /* ---------------- intro ---------------- */
-  "intro.scroll": { en: "Scroll to enter", fr: "Faites défiler pour entrer" },
+  "intro.scroll": { en: "Scroll to enter", fr: "Scroll to enter" },
 
   /* ---------------- hero ---------------- */
   "hero.kicker": {
-    en: "Product Designer & UX Consultant",
-    fr: "Product Designer & consultant UX",
+    en: "AI & Full Stack Developer",
+    fr: "AI & Full Stack Developer",
   },
-  "hero.h1a": { en: "Products that feel", fr: "Des produits qui semblent" },
-  "hero.h1aEm": { en: "obvious.", fr: "évidents." },
-  "hero.h1b": { en: "Design that", fr: "Un design qui ne l’" },
-  "hero.h1bEm": { en: "isn’t.", fr: "est pas." },
+  "hero.h1a": { en: "Engineering the Future", fr: "Engineering the Future" },
+  "hero.h1aEm": { en: "with AI.", fr: "with AI." },
+  "hero.h1b": { en: "Built for", fr: "Built for" },
+  "hero.h1bEm": { en: "impact.", fr: "impact." },
   "hero.sub": {
-    en: "I design digital products end to end — research, flows, interfaces, systems — with one obsession: making the complex feel effortless.",
-    fr: "Je conçois des produits numériques de bout en bout — recherche, parcours, interfaces, systèmes — avec une obsession : rendre le complexe évident.",
+    en: "I craft intelligent, scalable, and beautifully designed digital experiences — bridging cutting-edge AI research and robust full-stack engineering.",
+    fr: "I craft intelligent, scalable, and beautifully designed digital experiences — bridging cutting-edge AI research and robust full-stack engineering.",
   },
-  "hero.cta1": { en: "View My Work", fr: "Voir mes projets" },
-  "hero.cta2": { en: "See How I Work", fr: "Ma façon de travailler" },
-  "hero.scroll": { en: "Scroll to Explore", fr: "Faites défiler" },
-  "stat.projects": { en: "Projects Completed", fr: "Projets réalisés" },
-  "stat.years": { en: "Years of Experience", fr: "Ans d’expérience" },
-  "stat.countries": { en: "Countries Worked With", fr: "Pays collaborés" },
-  "stat.satisfaction": { en: "Client Satisfaction", fr: "Satisfaction client" },
+  "hero.cta1": { en: "View My Work", fr: "View My Work" },
+  "hero.cta2": { en: "Download Resume", fr: "Download Resume" },
+  "hero.scroll": { en: "Scroll to Explore", fr: "Scroll to Explore" },
+  "stat.projects": { en: "Live Projects", fr: "Live Projects" },
+  "stat.years": { en: "Years Building", fr: "Years Building" },
+  "stat.countries": { en: "Students Served", fr: "Students Served" },
+  "stat.satisfaction": { en: "Admin Load Cut", fr: "Admin Load Cut" },
 
   /* ---------------- about ---------------- */
-  "about.eyebrow": { en: "About", fr: "À propos" },
-  "about.h2a": { en: "Design is how I think —", fr: "Le design, c’est ma façon de penser —" },
-  "about.h2b": { en: "business is how I", fr: "le business, ma façon de la" },
-  "about.h2Em": { en: "aim", fr: "diriger" },
-  "about.h2c": { en: "it.", fr: "." },
+  "about.eyebrow": { en: "About", fr: "About" },
+  "about.h2a": { en: "Code is how I think —", fr: "Code is how I think —" },
+  "about.h2b": { en: "AI is how I", fr: "AI is how I" },
+  "about.h2Em": { en: "shape", fr: "shape" },
+  "about.h2c": { en: " it.", fr: " it." },
   "about.m1": {
-    en: "Sophia Antipolis Innovation Hackathon — LockAI",
-    fr: "Hackathon Innovation Sophia Antipolis — LockAI",
+    en: "IIT Guwahati — Deep Learning Research",
+    fr: "IIT Guwahati — Deep Learning Research",
   },
   "about.m2": {
-    en: "Years of cross-functional product experience",
-    fr: "Ans d’expérience produit transversale",
+    en: "Years of full-stack & AI development",
+    fr: "Years of full-stack & AI development",
   },
   "about.m3": {
-    en: "Revenue generated by conversion-focused work",
-    fr: "Revenus générés par un travail orienté conversion",
+    en: "Students served by live platform",
+    fr: "Students served by live platform",
   },
   "about.m4": {
-    en: "Tonnes of CO₂ the product I design aims to avoid by 2050",
-    fr: "Tonnes de CO₂ que le produit que je conçois vise à éviter d’ici 2050",
+    en: "Admin workload reduction at DRK Institutions",
+    fr: "Admin workload reduction at DRK Institutions",
   },
   "about.edu": {
-    en: "MSc International Business · Montpellier Business School · 2024–2026 · Global Market Intelligence · Strategic Leadership · AI in Business",
-    fr: "MSc International Business · Montpellier Business School · 2024–2026 · Intelligence des marchés · Leadership stratégique · IA en entreprise",
+    en: "B.Tech CSE (AI & ML) · DRK Group of Institutions · JNTUH Affiliated · 2022–2026",
+    fr: "B.Tech CSE (AI & ML) · DRK Group of Institutions · JNTUH Affiliated · 2022–2026",
   },
-  "about.cta": { en: "Explore My Work", fr: "Découvrir mes projets" },
+  "about.cta": { en: "Explore My Work", fr: "Explore My Work" },
 
-  /* ---------------- journey ----------------
-     Chapter copy lives in content/journey.ts; only the chrome is here. */
-  "journey.eyebrow": { en: "My Journey", fr: "Mon parcours" },
-  "journey.enter": { en: "Scroll to travel", fr: "Faites défiler pour avancer" },
-  "journey.chapter": { en: "Chapter", fr: "Chapitre" },
+  /* ---------------- journey ---------------- */
+  "journey.eyebrow": { en: "My Journey", fr: "My Journey" },
+  "journey.enter": { en: "Scroll to travel", fr: "Scroll to travel" },
+  "journey.chapter": { en: "Chapter", fr: "Chapter" },
   "journey.lede": {
-    en: "From Telangana to the Côte d’Azur — the chapters that turned a salesperson into a product designer.",
-    fr: "Du Telangana à la Côte d’Azur — les chapitres qui ont transformé un commercial en product designer.",
+    en: "From Hyderabad to IIT Guwahati and HAL — the chapters that turned a CS student into a full-stack AI engineer.",
+    fr: "From Hyderabad to IIT Guwahati and HAL — the chapters that turned a CS student into a full-stack AI engineer.",
   },
 
   /* ---------------- design stack ---------------- */
-  "stack.eyebrow": { en: "Toolkit", fr: "Outils" },
-  "stack.h2": { en: "My Design", fr: "Ma boîte à" },
-  "stack.h2Em": { en: "Stack.", fr: "outils." },
+  "stack.eyebrow": { en: "Toolkit", fr: "Toolkit" },
+  "stack.h2": { en: "My Tech", fr: "My Tech" },
+  "stack.h2Em": { en: "Stack.", fr: "Stack." },
   "stack.lede": {
-    en: "The tools I use to research, design, prototype, collaborate and ship — from the first rough sketch to production code.",
-    fr: "Les outils avec lesquels je recherche, conçois, prototype, collabore et livre — du premier croquis au code en production.",
+    en: "The tools I use to research, architect, build and deploy — from AI model training to production-ready full-stack applications.",
+    fr: "The tools I use to research, architect, build and deploy — from AI model training to production-ready full-stack applications.",
   },
-  "stack.count": { en: "tools", fr: "outils" },
+  "stack.count": { en: "tools", fr: "tools" },
   "stack.disciplines": { en: "disciplines", fr: "disciplines" },
 
   /* ---------------- work ---------------- */
-  "work.eyebrow": { en: "Featured Work", fr: "Projets sélectionnés" },
-  "work.h2a": { en: "Selected projects,", fr: "Des projets choisis," },
-  "work.h2b": { en: "designed to", fr: "conçus pour être" },
-  "work.h2Em": { en: "ship.", fr: "livrés." },
+  "work.eyebrow": { en: "Featured Work", fr: "Featured Work" },
+  "work.h2a": { en: "Selected projects,", fr: "Selected projects," },
+  "work.h2b": { en: "built to", fr: "built to" },
+  "work.h2Em": { en: "ship.", fr: "ship." },
   "work.lede": {
-    en: "Product UX, product strategy, data design and systems design — each project a different capability, all one practice.",
-    fr: "UX produit, stratégie produit, design de données et de systèmes — chaque projet une compétence différente, une seule pratique.",
+    en: "Full-stack platforms, AI systems, mobile apps and network security tools — each project a real-world deployment, all one practice.",
+    fr: "Full-stack platforms, AI systems, mobile apps and network security tools — each project a real-world deployment, all one practice.",
   },
-  "work.open": { en: "Open case study", fr: "Voir l’étude de cas" },
-  "work.hint": { en: "SCROLL TO BROWSE", fr: "FAITES DÉFILER" },
+  "work.open": { en: "Open case study", fr: "Open case study" },
+  "work.hint": { en: "SCROLL TO BROWSE", fr: "SCROLL TO BROWSE" },
 
   /* ---------------- experience ---------------- */
-  "exp.eyebrow": { en: "Experience", fr: "Expérience" },
-  "exp.h2": { en: "Where I built my", fr: "Là où j’ai forgé mon" },
-  "exp.h2Em": { en: "judgment.", fr: "jugement." },
-  "exp.worked": { en: "What I worked on", fr: "Ce sur quoi j’ai travaillé" },
+  "exp.eyebrow": { en: "Experience", fr: "Experience" },
+  "exp.h2": { en: "Where I built my", fr: "Where I built my" },
+  "exp.h2Em": { en: "craft.", fr: "craft." },
+  "exp.worked": { en: "What I worked on", fr: "What I worked on" },
   "exp.impact": { en: "Impact", fr: "Impact" },
-  "exp.tools": { en: "Tools & skills", fr: "Outils & compétences" },
-  "exp.hint": { en: "SCROLL · CLICK TO JUMP", fr: "DÉFILER · CLIQUER POUR NAVIGUER" },
-  "type.Internship": { en: "Internship", fr: "Stage" },
-  "type.Full-time": { en: "Full-time", fr: "Temps plein" },
+  "exp.tools": { en: "Tools & skills", fr: "Tools & skills" },
+  "exp.hint": { en: "SCROLL · CLICK TO JUMP", fr: "SCROLL · CLICK TO JUMP" },
+  "type.Internship": { en: "Internship", fr: "Internship" },
+  "type.Full-time": { en: "Full-time", fr: "Full-time" },
   "type.Hackathon": { en: "Hackathon", fr: "Hackathon" },
   "type.Freelance": { en: "Freelance", fr: "Freelance" },
 
   /* ---------------- credentials ---------------- */
   "cert.introLabel": { en: "Introduction", fr: "Introduction" },
-  "cert.introTitle1": { en: "VERIFIED", fr: "TITRES" },
-  "cert.introTitle2": { en: "CREDENTIALS", fr: "VÉRIFIÉS" },
+  "cert.introTitle1": { en: "VERIFIED", fr: "VERIFIED" },
+  "cert.introTitle2": { en: "CREDENTIALS", fr: "CREDENTIALS" },
   "cert.introBody": {
-    en: "Continuous, applied learning across data, design, marketing and AI — the technical base underneath the product work.",
-    fr: "Un apprentissage continu et appliqué en données, design, marketing et IA — la base technique du travail produit.",
+    en: "Continuous, applied learning across AI, deep learning, network security and full-stack development — validated through real-world deployments.",
+    fr: "Continuous, applied learning across AI, deep learning, network security and full-stack development — validated through real-world deployments.",
   },
   "cert.introNote": {
-    en: "Five programmes · Coursera, LinkedIn Learning and hands-on portfolio projects.",
-    fr: "Cinq programmes · Coursera, LinkedIn Learning et projets concrets.",
+    en: "Three validated internships · IIT Guwahati, HAL, DRK Institutions.",
+    fr: "Three validated internships · IIT Guwahati, HAL, DRK Institutions.",
   },
-  "cert.eyebrow": { en: "Credentials", fr: "Titres & certifications" },
-  "cert.h2": { en: "Credentials", fr: "Certifications" },
+  "cert.eyebrow": { en: "Credentials", fr: "Credentials" },
+  "cert.h2": { en: "Credentials", fr: "Credentials" },
   "cert.lede": {
-    en: "Professional certifications and credentials earned throughout my design and technology journey.",
-    fr: "Les certifications et titres professionnels obtenus tout au long de mon parcours en design et en technologie.",
+    en: "Professional credentials and internship validations earned through real-world engineering and AI research.",
+    fr: "Professional credentials and internship validations earned through real-world engineering and AI research.",
   },
-  "cert.certified": { en: "Certified", fr: "Certifié" },
-  "cert.brandRole": { en: "Product Designer", fr: "Product Designer" },
-  "cert.issuerTBC": { en: "Issuer — to confirm", fr: "Organisme — à confirmer" },
+  "cert.certified": { en: "Certified", fr: "Certified" },
+  "cert.brandRole": { en: "AI & Full Stack Developer", fr: "AI & Full Stack Developer" },
+  "cert.issuerTBC": { en: "Issuer — to confirm", fr: "Issuer — to confirm" },
   "cert.certification": { en: "Certification", fr: "Certification" },
-  "cert.verified": { en: "✓ Verified", fr: "✓ Vérifié" },
-  "cert.onRequest": { en: "Credential on request", fr: "Justificatif sur demande" },
-  "cert.issuedBy": { en: "Issued by", fr: "Délivré par" },
-  "cert.year": { en: "Year", fr: "Année" },
-  "cert.id": { en: "Credential ID", fr: "N° de justificatif" },
-  "cert.tbc": { en: "To confirm", fr: "À confirmer" },
-  "cert.skills": { en: "Skills", fr: "Compétences" },
-  "cert.verify": { en: "Verify credential ↗", fr: "Vérifier le justificatif ↗" },
-  "cert.foot": { en: "Credentials", fr: "Titres" },
+  "cert.verified": { en: "✓ Verified", fr: "✓ Verified" },
+  "cert.onRequest": { en: "Credential on request", fr: "Credential on request" },
+  "cert.issuedBy": { en: "Issued by", fr: "Issued by" },
+  "cert.year": { en: "Year", fr: "Year" },
+  "cert.id": { en: "Credential ID", fr: "Credential ID" },
+  "cert.tbc": { en: "To confirm", fr: "To confirm" },
+  "cert.skills": { en: "Skills", fr: "Skills" },
+  "cert.verify": { en: "Verify credential ↗", fr: "Verify credential ↗" },
+  "cert.foot": { en: "Credentials", fr: "Credentials" },
 
   /* ---------------- gallery — the people behind the work ---------------- */
-  "gallery.eyebrow": { en: "The Archive", fr: "L’archive" },
-  "gallery.h2a": { en: "The people behind", fr: "Celles et ceux derrière" },
-  "gallery.h2Em": { en: "the work", fr: "le travail" },
+  "gallery.eyebrow": { en: "The Archive", fr: "The Archive" },
+  "gallery.h2a": { en: "The moments behind", fr: "The moments behind" },
+  "gallery.h2Em": { en: "the work", fr: "the work" },
   "gallery.lede": {
-    en: "The people, moments and experiences that shaped the work behind the screen.",
-    fr: "Les personnes, les moments et les expériences qui ont façonné le travail derrière l’écran.",
+    en: "The places, people and experiences that shaped the engineering behind the screen.",
+    fr: "The places, people and experiences that shaped the engineering behind the screen.",
   },
   "gallery.alt": {
-    en: "A moment with the people behind the work",
-    fr: "Un moment avec celles et ceux derrière le travail",
+    en: "A moment in Hemanth's journey",
+    fr: "A moment in Hemanth's journey",
   },
-  "gallery.frames": { en: "Frames", fr: "Images" },
-  "gallery.hint": { en: "Scroll to travel the archive", fr: "Faites défiler pour parcourir l’archive" },
+  "gallery.frames": { en: "Frames", fr: "Frames" },
+  "gallery.hint": { en: "Scroll to travel the archive", fr: "Scroll to travel the archive" },
 
   /* ---------------- connect ---------------- */
-  "connect.eyebrow": { en: "Let’s Connect", fr: "Restons en contact" },
-  "connect.h2a": { en: "Let’s create what’s", fr: "Créons ce qui" },
-  "connect.h2Em": { en: "next.", fr: "vient." },
+  "connect.eyebrow": { en: "Let's Connect", fr: "Let's Connect" },
+  "connect.h2a": { en: "Let's build what's", fr: "Let's build what's" },
+  "connect.h2Em": { en: "next.", fr: "next." },
   "connect.lede": {
-    en: "I’m open to product design roles, collaborations and good conversations — if you’re building something people should love, I’d like to hear about it.",
-    fr: "Je suis ouvert aux postes en product design, aux collaborations et aux bonnes conversations — si vous construisez quelque chose que les gens devraient adorer, parlons-en.",
+    en: "I'm open to full-stack and AI opportunities, collaborations and good conversations — if you're building something technically ambitious, I'd love to hear about it.",
+    fr: "I'm open to full-stack and AI opportunities, collaborations and good conversations — if you're building something technically ambitious, I'd love to hear about it.",
   },
-  "connect.cta": { en: "Start a Conversation", fr: "Démarrer la conversation" },
-  "connect.credit": { en: "Designed & Developed by", fr: "Conçu & développé par" },
-  "connect.top": { en: "Back to top ↑", fr: "Haut de page ↑" },
+  "connect.cta": { en: "Say Hello", fr: "Say Hello" },
+  "connect.credit": { en: "Designed & Developed by", fr: "Designed & Developed by" },
+  "connect.top": { en: "Back to top ↑", fr: "Back to top ↑" },
 
   /* ---------------- case study (/work/[slug]) ---------------- */
-  "case.back": { en: "← Back to work", fr: "← Retour aux projets" },
-  "case.kicker": { en: "Case Study", fr: "Étude de cas" },
-  "case.role": { en: "Role", fr: "Rôle" },
-  "case.timeline": { en: "Timeline", fr: "Période" },
+  "case.back": { en: "← Back to work", fr: "← Back to work" },
+  "case.kicker": { en: "Case Study", fr: "Case Study" },
+  "case.role": { en: "Role", fr: "Role" },
+  "case.timeline": { en: "Timeline", fr: "Timeline" },
   "case.focus": { en: "Focus", fr: "Focus" },
-  "case.site": { en: "Live product", fr: "Produit en ligne" },
-  "case.repo": { en: "Source", fr: "Code source" },
-  "case.cover": { en: "COVER", fr: "VISUEL" },
-  "case.context": { en: "Context", fr: "Contexte" },
-  "case.problem": { en: "The Problem", fr: "Le problème" },
-  "case.process": { en: "Process", fr: "Démarche" },
-  "case.decisions": { en: "Design Decisions", fr: "Décisions de design" },
-  "case.outcome": { en: "Outcome", fr: "Résultats" },
-  "case.reflection": { en: "Reflection", fr: "Ce que j’en retire" },
-  "case.all": { en: "← All projects", fr: "← Tous les projets" },
-  "case.next": { en: "Next project", fr: "Projet suivant" },
+  "case.site": { en: "Live product", fr: "Live product" },
+  "case.repo": { en: "Source", fr: "Source" },
+  "case.cover": { en: "COVER", fr: "COVER" },
+  "case.context": { en: "Context", fr: "Context" },
+  "case.problem": { en: "The Problem", fr: "The Problem" },
+  "case.process": { en: "Process", fr: "Process" },
+  "case.decisions": { en: "Design Decisions", fr: "Design Decisions" },
+  "case.outcome": { en: "Outcome", fr: "Outcome" },
+  "case.reflection": { en: "Reflection", fr: "Reflection" },
+  "case.all": { en: "← All projects", fr: "← All projects" },
+  "case.next": { en: "Next project", fr: "Next project" },
 
   /* ---------------- lab (/tunnel) ---------------- */
   "lab.back": { en: "← PORTFOLIO", fr: "← PORTFOLIO" },
   "lab.hint": {
     en: "LAB · TUNNEL TYPE — SCROLL TO TRAVEL · MOVE THE MOUSE",
-    fr: "LAB · TUNNEL TYPE — FAITES DÉFILER POUR AVANCER · BOUGEZ LA SOURIS",
+    fr: "LAB · TUNNEL TYPE — SCROLL TO TRAVEL · MOVE THE MOUSE",
   },
 
   /* ---------------- 404 ---------------- */
-  "nf.label": { en: "404 — NOT FOUND", fr: "404 — PAGE INTROUVABLE" },
-  "nf.h1": { en: "This page went", fr: "Cette page a quitté" },
-  "nf.h1Em": { en: "off the grid.", fr: "les radars." },
-  "nf.cta": { en: "Back to the portfolio →", fr: "Retour au portfolio →" },
+  "nf.label": { en: "404 — NOT FOUND", fr: "404 — NOT FOUND" },
+  "nf.h1": { en: "This page went", fr: "This page went" },
+  "nf.h1Em": { en: "off the grid.", fr: "off the grid." },
+  "nf.cta": { en: "Back to the portfolio →", fr: "Back to the portfolio →" },
 };
 
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: string) => string };
@@ -235,7 +228,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const saved = window.localStorage.getItem("lang") as Lang | null;
-    if (saved === "en" || saved === "fr") {
+    if (saved === "en") {
       setLangState(saved);
       document.documentElement.lang = saved;
     }
@@ -251,7 +244,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = l;
   };
 
-  const t = (k: string) => DICT[k]?.[lang] ?? DICT[k]?.en ?? k;
+  const t = (k: string) => DICT[k]?.["en"] ?? k;
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>
@@ -263,14 +256,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 export const useLang = () => useContext(LanguageContext);
 
 /** Pick a translated field off a content record: `L(lang, item, "summary")`
- *  returns `item.fr.summary` when available, else the English original. */
+ *  returns the English original. */
 export function L<T extends { fr?: Record<string, unknown> }>(
   lang: Lang,
   item: T,
   field: keyof T & string
 ): string {
-  if (lang === "fr" && item.fr && typeof item.fr[field] === "string") {
-    return item.fr[field] as string;
-  }
   return item[field] as unknown as string;
 }

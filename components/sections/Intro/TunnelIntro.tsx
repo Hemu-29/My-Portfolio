@@ -60,7 +60,7 @@ const T_RELEASE = 0.9; /* canvas begins to release (fade) */
 const MOUSE_X = 0.11;
 const MOUSE_Y = 0.07;
 
-export default function TunnelIntro({ text = "GIREESH" }: { text?: string }) {
+export default function TunnelIntro({ text = "HEMANTH" }: { text?: string }) {
   const rootRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);

@@ -7,7 +7,7 @@ import LabBar from "./LabBar";
    effect can be approved on its own before it's placed. */
 
 export const metadata: Metadata = {
-  title: "Tunnel Type — Lab · Gireesh",
+  title: "Tunnel Type — Lab · Hemanth",
   robots: { index: false },
 };
 
@@ -25,7 +25,7 @@ export default function TunnelLab() {
       <LabBar />
 
       <div style={{ flex: 1, minHeight: 0 }}>
-        <TunnelType text="GIREESH" />
+        <TunnelType text="HEMANTH" />
       </div>
     </main>
   );

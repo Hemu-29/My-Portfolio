@@ -193,16 +193,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: clamp(32px, 4.4vh, 44px);
-  padding: 0 12px;
+  height: clamp(38px, 5vh, 50px);
+  max-width: 180px;
+  padding: 6px 14px;
   border-radius: 8px;
   background: #ffffff;
   box-shadow: 0 2px 10px rgba(20, 20, 20, 0.14);
 }
 .logoPlate img {
-  height: clamp(15px, 2.1vh, 21px);
+  max-height: 100%;
+  max-width: 100%;
   width: auto;
-  display: block;
+  height: auto;
   object-fit: contain;
 }
 .issuerName {

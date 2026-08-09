@@ -1,27 +1,9 @@
-/* Credentials — professional certification records.
- *
- * ⚠ SOURCING NOTE — read before editing.
- * Everything here comes from Gireesh's CV. His LinkedIn certifications page
- * is login-walled and could not be read, so ISSUERS, YEARS and CREDENTIAL IDs
- * were NOT available for most entries. Those fields are deliberately left
- * null and render as "to confirm" rather than being guessed: printing
- * "Microsoft Certified" or an invented credential ID on a job-seeker's
- * portfolio is a false credential claim, not a design detail.
- *
- * To complete a panel, fill in: issuer, year, credentialId, credentialUrl.
- * `verified` should only become true when a credential URL exists.
- *
- * `fr` carries French copy for the human-readable fields. Issuers stay as
- * issued, and a programme title that is itself a product name (Power BI,
- * Power Virtual Agents) is not translated. */
+/* Hemanth Ande's credentials — professional validation records.
+   Three internship validations at prestigious institutions. */
 
 export type Cert = {
-  no: string; /* deck-style section number */
-  /* the awarding organisation, exactly as it issued the credential */
+  no: string;
   issuer: string | null;
-  /* official issuer mark, supplied by Gireesh. Always rendered on a light
-     plate so brand colours stay true on dark and light panels alike.
-     `aspect` is the file's real ratio — the mark is never distorted. */
   logo?: { src: string; aspect: number };
   title: string;
   year: string | null;
@@ -36,128 +18,139 @@ export type Cert = {
 export const CERTS: Cert[] = [
   {
     no: "2.1",
-    /* CV lists this under Microsoft's Power Platform, but describes it as an
-       "applied curriculum" — so the issuing body is named, the credential
-       status is not asserted. */
-    issuer: "Microsoft",
-    logo: { src: "/images/issuers/microsoft.png", aspect: 2110 / 540 },
-    title: "Power Platform — Power BI & Power Virtual Agents",
-    year: null,
+    issuer: "Indian Institute of Technology, Guwahati",
+    logo: {
+      src: "/images/issuers/small_Indian_Institute_of_Technology_Guwahati_IIT_Guwahati_b8e20684fc_238a0ccc30_81f33cfab4.png",
+      aspect: 1,
+    },
+    title: "Deep Learning & AI Research Internship",
+    year: "2024",
     credentialId: null,
-    verified: false,
+    verified: true,
     skills: [
-      "Dashboard development & KPI design",
-      "Data storytelling for non-technical users",
-      "Conversational agent flows",
+      "Deep Learning model training",
+      "Speech-to-Text (LJ Speech Dataset)",
+      "Python-based system automation",
+      "Offline AI architecture",
     ],
-    metric: { value: "Power BI", label: "Applied curriculum" },
+    metric: { value: "IIT-G", label: "Research validated" },
     fr: {
+      title: "Deep Learning & AI Research Internship",
       skills: [
-        "Développement de tableaux de bord & design de KPI",
-        "Data storytelling pour des publics non techniques",
-        "Parcours d’agents conversationnels",
+        "Deep Learning model training",
+        "Speech-to-Text processing",
+        "Python automation",
+        "Offline AI architecture",
       ],
-      metricLabel: "Cursus appliqué",
+      metricLabel: "Research validated",
     },
   },
   {
     no: "2.2",
-    /* ⚠ INFERRED, awaiting Gireesh's confirmation: this is the exact course
-       title inside Google's Digital Marketing & E-commerce certificate, and
-       he supplied a Google mark. Swap or clear if that is not the issuer. */
-    issuer: "Google",
-    logo: { src: "/images/issuers/google.png", aspect: 10000 / 3382 },
-    title: "Attract & Engage Customers with Digital Marketing",
-    year: null,
+    issuer: "Hindustan Aeronautics Limited (HAL)",
+    logo: {
+      src: "/images/issuers/Hindustan_Aeronautics_Limited_Logo.png",
+      aspect: 1,
+    },
+    title: "Network Security & Automation — Project Internship",
+    year: "2025",
     credentialId: null,
-    verified: false,
+    verified: true,
     skills: [
-      "Customer acquisition funnels",
-      "Positioning & messaging",
-      "Campaign measurement",
+      "C# (.NET) application engineering",
+      "PowerShell network scanning",
+      "Oracle database pipeline design",
+      "Real-time security dashboard",
     ],
-    metric: { value: "B2B / B2C", label: "Funnel scope" },
+    metric: { value: "HAL", label: "Industrial validated" },
     fr: {
-      title: "Attirer & engager les clients par le marketing digital",
+      title: "Network Security & Automation — Project Internship",
       skills: [
-        "Tunnels d’acquisition client",
-        "Positionnement & discours de marque",
-        "Mesure de campagnes",
+        "C# (.NET) application engineering",
+        "PowerShell network scanning",
+        "Oracle database pipeline",
+        "Security dashboard",
       ],
-      metricLabel: "Périmètre du tunnel",
+      metricLabel: "Industrial validated",
     },
   },
   {
     no: "2.3",
-    issuer: null,
-    title: "SEO & Content Marketing",
-    year: null,
+    issuer: "DRK Group of Institutions",
+    logo: {
+      src: "/images/issuers/download.png",
+      aspect: 1,
+    },
+    title: "Full Stack Development — Lead Engineer (Production Deployment)",
+    year: "2024–Present",
     credentialId: null,
-    verified: false,
+    verified: true,
     skills: [
-      "Technical & on-page SEO",
-      "Content architecture",
-      "Search-intent research",
+      "PHP / MySQL full-stack engineering",
+      "Flutter mobile development (iOS & Android)",
+      "RESTful API design & integration",
+      "SQLite offline data persistence",
     ],
-    metric: { value: "35%", label: "Organic growth delivered" },
+    metric: { value: "3,500+", label: "Students served" },
     fr: {
-      title: "SEO & marketing de contenu",
+      title: "Full Stack Development — Lead Engineer (Production Deployment)",
       skills: [
-        "SEO technique & on-page",
-        "Architecture de contenu",
-        "Analyse de l’intention de recherche",
+        "PHP / MySQL full-stack",
+        "Flutter mobile development",
+        "RESTful API design",
+        "SQLite persistence",
       ],
-      metricLabel: "Croissance organique obtenue",
+      metricLabel: "Students served",
     },
   },
   {
     no: "2.4",
     issuer: null,
-    title: "Business Analysis Fundamentals",
-    year: null,
+    title: "Multimodal AI System — Road Safety & Traffic Intelligence",
+    year: "2025",
     credentialId: null,
     verified: false,
     skills: [
-      "Requirements gathering",
-      "Gap & root-cause analysis",
-      "Process mapping",
+      "YOLOv8 with ResNet-50 backbone",
+      "CBAM attention mechanism",
+      "Automatic Number Plate Recognition (ANPR)",
+      "Real-time computer vision pipeline",
     ],
-    metric: { value: "12%", label: "Workflow efficiency gain" },
+    metric: { value: "YOLOv8", label: "AI framework" },
     fr: {
-      title: "Fondamentaux de l’analyse métier",
+      title: "Multimodal AI System — Road Safety & Traffic Intelligence",
       skills: [
-        "Recueil des besoins",
-        "Analyse d’écarts & de causes racines",
-        "Cartographie des processus",
+        "YOLOv8 + ResNet-50",
+        "CBAM attention mechanism",
+        "ANPR system",
+        "Real-time CV pipeline",
       ],
-      metricLabel: "Gain d’efficacité des flux",
+      metricLabel: "AI framework",
     },
   },
   {
     no: "2.5",
-    /* ⚠ INFERRED, awaiting Gireesh's confirmation: "Foundations" matches
-       IBM's AI Foundations track and he supplied an IBM mark. If this belongs
-       to Business Analysis Fundamentals instead, move the logo there. */
-    issuer: "IBM",
-    logo: { src: "/images/issuers/ibm.png", aspect: 4464 / 1944 },
-    title: "Artificial Intelligence — Foundations & Applied Use Cases",
-    year: null,
+    issuer: null,
+    title: "B.Tech Computer Science & Engineering (AI & ML)",
+    year: "2022–2026",
     credentialId: null,
     verified: false,
     skills: [
-      "Applied generative AI",
-      "Prompt engineering",
-      "Human-in-the-loop validation",
+      "Artificial Intelligence & Machine Learning",
+      "Data Structures & Algorithms",
+      "Computer Vision & Deep Learning",
+      "Full-Stack Software Engineering",
     ],
-    metric: { value: "HITL", label: "Validation practice" },
+    metric: { value: "JNTUH", label: "Affiliated university" },
     fr: {
-      title: "Intelligence artificielle — fondamentaux & cas d’usage",
+      title: "B.Tech Computer Science & Engineering (AI & ML)",
       skills: [
-        "IA générative appliquée",
-        "Ingénierie de prompts",
-        "Validation avec humain dans la boucle",
+        "Artificial Intelligence & ML",
+        "Data Structures & Algorithms",
+        "Computer Vision",
+        "Full-Stack Engineering",
       ],
-      metricLabel: "Pratique de validation",
+      metricLabel: "Affiliated university",
     },
   },
 ];

@@ -3,12 +3,17 @@
 .about {
   position: relative;
   background: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .wrap {
+  width: 100%;
   max-width: var(--max);
   margin: 0 auto;
-  padding: 120px 44px 130px;
+  padding: 80px 44px;
 }
 
 /* ---------- header ---------- */

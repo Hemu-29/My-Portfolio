@@ -1,7 +1,5 @@
-/* My Design Stack — tools shown in the spiral orbit.
-   `src` uses a real logo from /public/images/logos when we have one;
-   otherwise a brand-tinted monogram mark keeps the set visually uniform.
-   To upgrade a monogram: drop an SVG/PNG in that folder and swap in `src`. */
+/* Hemanth Ande's tech stack — tools shown in the spiral orbit.
+   Replaced Gireesh's design/UX tools with Hemanth's full-stack & AI engineering stack. */
 
 export type Tool = {
   name: string;
@@ -12,34 +10,33 @@ export type Tool = {
 };
 
 export const TOOLS: Tool[] = [
-  /* — AI — */
-  { name: "Claude", group: "AI", src: "/images/logos/claude.png" },
-  { name: "ChatGPT", group: "AI", src: "/images/logos/chatgpt.png" },
-  { name: "Gemini", group: "AI", mono: "Gm", color: "#2C6BD8" },
-  { name: "Perplexity", group: "AI", mono: "Px", color: "#1F7A86" },
+  /* — AI & Deep Learning — */
+  { name: "PyTorch", group: "AI", mono: "Pt", color: "#EE4C2C" },
+  { name: "YOLOv8", group: "AI", mono: "Yv8", color: "#00BFFF" },
+  { name: "OpenCV", group: "AI", mono: "CV", color: "#5C3EE8" },
+  { name: "TensorFlow", group: "AI", mono: "Tf", color: "#FF6F00" },
 
-  /* — Design — */
-  { name: "Figma", group: "Design", src: "/images/logos/figma.png" },
-  { name: "Framer", group: "Design", src: "/images/logos/framer.png" },
-  { name: "Spline", group: "Design", src: "/images/logos/spline.png" },
-  { name: "Notion", group: "Design", src: "/images/logos/notion.png" },
+  /* — Frontend — */
+  { name: "JavaScript", group: "Design", mono: "JS", color: "#F7DF1E" },
+  { name: "HTML5", group: "Design", mono: "H5", color: "#E34F26" },
+  { name: "CSS3", group: "Design", mono: "C3", color: "#1572B6" },
+  { name: "Flutter", group: "Design", mono: "Fl", color: "#54C5F8" },
 
-  /* — Build — */
-  { name: "Cursor", group: "Build", mono: "Cu", color: "#141414" },
-  { name: "VS Code", group: "Build", mono: "VS", color: "#0065A9" },
+  /* — Backend & DB — */
+  { name: "PHP", group: "Build", mono: "Php", color: "#8892BF" },
+  { name: "C# .NET", group: "Build", mono: "C#", color: "#512BD4" },
+  { name: "MySQL", group: "Build", mono: "My", color: "#00758F" },
+  { name: "Oracle", group: "Build", mono: "Or", color: "#F80000" },
+  { name: "SQLite", group: "Build", mono: "Sl", color: "#003B57" },
+  { name: "REST APIs", group: "Build", mono: "API", color: "#2ECC71" },
   { name: "GitHub", group: "Build", mono: "GH", color: "#181717" },
-  { name: "React", group: "Build", mono: "Re", color: "#0E7C99" },
-  { name: "Next.js", group: "Build", mono: "N", color: "#141414" },
-  { name: "Tailwind", group: "Build", mono: "TW", color: "#0891A6" },
-  { name: "HTML", group: "Build", mono: "H5", color: "#D6431C" },
-  { name: "CSS", group: "Build", mono: "C3", color: "#1572B6" },
+  { name: "VS Code", group: "Build", mono: "VS", color: "#0065A9" },
 
-  /* — Creative — */
-  { name: "Photoshop", group: "Creative", mono: "Ps", color: "#1E7FC4" },
-  { name: "Illustrator", group: "Creative", mono: "Ai", color: "#D97A00" },
-  { name: "After Effects", group: "Creative", mono: "Ae", color: "#5C4FE0" },
-  { name: "Midjourney", group: "Creative", src: "/images/logos/midjourney.png" },
-  { name: "CapCut", group: "Creative", src: "/images/logos/capcut.png" },
-  { name: "Runway", group: "Creative", mono: "Rw", color: "#141414" },
-  { name: "ElevenLabs", group: "Creative", mono: "11", color: "#141414" },
+  /* — Languages — */
+  { name: "Python", group: "Creative", mono: "Py", color: "#306998" },
+  { name: "Java", group: "Creative", mono: "Jv", color: "#007396" },
+  { name: "Dart", group: "Creative", mono: "Dt", color: "#0175C2" },
+  { name: "C", group: "Creative", mono: "C", color: "#A8B9CC" },
+  { name: "PowerShell", group: "Creative", mono: "PS", color: "#012456" },
+  { name: "Android Studio", group: "Creative", mono: "As", color: "#3DDC84" },
 ];

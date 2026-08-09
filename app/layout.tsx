@@ -24,26 +24,26 @@ const caveat = Caveat({
 });
 
 const DESCRIPTION =
-  "Product Designer crafting UX for climate-tech and AI products — where design, data, and business strategy meet. Based in Antibes, France.";
+  "AI & Full Stack Developer crafting intelligent, scalable, and beautifully designed digital experiences — bridging cutting-edge AI research and robust engineering.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Gireesh Kumar Reddy — Product Designer",
+    default: "Hemanth Ande | AI & Full Stack Developer",
     template: "%s",
   },
   description: DESCRIPTION,
   openGraph: {
-    title: "Gireesh Kumar Reddy — Product Designer",
+    title: "Hemanth Ande | AI & Full Stack Developer",
     description: DESCRIPTION,
     url: SITE_URL,
-    siteName: "Gireesh — Portfolio",
+    siteName: "Hemanth Ande — Portfolio",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gireesh Kumar Reddy — Product Designer",
+    title: "Hemanth Ande | AI & Full Stack Developer",
     description: DESCRIPTION,
   },
 };
@@ -54,7 +54,7 @@ const personJsonLd = {
   name: PERSON.name,
   jobTitle: PERSON.jobTitle,
   email: `mailto:${PERSON.email}`,
-  address: { "@type": "PostalAddress", addressLocality: "Antibes", addressCountry: "FR" },
+  address: { "@type": "PostalAddress", addressLocality: "Hyderabad", addressCountry: "IN" },
   url: SITE_URL,
   sameAs: PERSON.sameAs,
 };

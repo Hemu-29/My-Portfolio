@@ -1,20 +1,5 @@
-/* THE JOURNEY — the chapters the light tunnel travels through.
- *
- * ⚠ SOURCING: every fact here traces to Gireesh's CV (mirrored in
- * content/experience.ts) — companies, dates, places, roles and outcomes.
- * The 2021 chapter carries only what he stated himself: the year and
- * Telangana. Nothing biographical is invented around it.
- *
- * Shape per chapter:
- *   year   — shown large, the anchor
- *   title  — what the chapter is about, in his voice
- *   place  — where it happened (context line)
- *   story  — what was actually happening, 2–3 sentences
- *   bridge — how it handed over to the next chapter (the transition line)
- *
- * `fr` mirrors every translatable field (see lib/i18n.tsx -> L()). Company,
- * product and place names stay as they are. French runs ~15% longer than
- * English, so the copy is written to length, not translated literally. */
+/* Hemanth Ande's journey — the chapters the light tunnel travels through.
+ * From Hyderabad to IIT Guwahati and HAL — turning a CS student into an AI engineer. */
 
 export type Chapter = {
   id: string;
@@ -29,106 +14,108 @@ export type Chapter = {
 export const CHAPTERS: Chapter[] = [
   {
     id: "roots",
-    year: "2021",
-    title: "Roots",
-    place: "Telangana, India",
-    story:
-      "Where the story starts. Southern India — the fixed point everything after it gets measured against: seven roles, two countries, and one deliberate change of craft.",
-    bridge: "It started with a sales target, not a design brief.",
-    fr: {
-      title: "Racines",
-      place: "Telangana, Inde",
-      story:
-        "Là où l’histoire commence. Le sud de l’Inde — le point fixe auquel tout se mesure ensuite : sept postes, deux pays, et un changement de métier assumé.",
-      bridge: "Cela a commencé par un objectif de vente, pas par un brief de design.",
-    },
-  },
-  {
-    id: "customers",
     year: "2022",
-    title: "Customers first, pixels much later",
-    place: "Tutorac → Sage Finance · Telangana",
+    title: "The Beginning",
+    place: "Hyderabad, India",
     story:
-      "Business development for a subscription e-learning platform: reading why people renewed, why they left, and what actually moved a portfolio. $50K+ in subscriptions in a single month. By September I had moved to Sage Finance.",
-    bridge:
-      "Two years of asking customers questions before I ever opened a design tool — still the part of my process I trust most.",
+      "Where the story starts. Enrolled in B.Tech CSE (AI & ML) at DRK Group of Institutions under JNTUH — stepping into a world of code, algorithms and the promise of artificial intelligence.",
+    bridge: "It started with curiosity about how machines could learn to think.",
     fr: {
-      title: "Les clients d’abord, les pixels bien plus tard",
-      place: "Tutorac → Sage Finance · Telangana",
+      title: "The Beginning",
+      place: "Hyderabad, India",
       story:
-        "Développement commercial pour une plateforme d’e-learning par abonnement : comprendre pourquoi on renouvelle, pourquoi on part, ce qui fait vraiment bouger un portefeuille. Plus de 50 000 $ d’abonnements en un mois. En septembre, je rejoignais Sage Finance.",
-      bridge:
-        "Deux ans à interroger des clients avant d’ouvrir le moindre outil de design — c’est resté la partie de mon processus en laquelle j’ai le plus confiance.",
+        "Where the story starts. Enrolled in B.Tech CSE (AI & ML) at DRK Group of Institutions under JNTUH — stepping into a world of code, algorithms and the promise of artificial intelligence.",
+      bridge: "It started with curiosity about how machines could learn to think.",
     },
   },
   {
-    id: "playbook",
+    id: "first-build",
     year: "2023",
-    title: "Writing the playbook",
-    place: "Sage Finance · Telangana, India",
+    title: "First real builds",
+    place: "DRK Group of Institutions · Hyderabad",
     story:
-      "A full year owning sales strategy and client acquisition: market analysis, segmentation, pipeline against tracked KPIs. I wrote the inbound-to-close playbook the wider sales team adopted, and a $20K+ week turned into a promotion to Marketing Team Lead.",
+      "The year of going beyond theory. Building first full-stack web applications, exploring JavaScript, PHP and MySQL, and discovering the satisfaction of deploying something real that people actually use. Computer Vision and AI research began here.",
     bridge:
-      "That playbook was the first time I designed a system instead of working inside one. I wanted to learn how to do it properly.",
+      "Every project taught me that clean code matters less than code that solves real problems.",
     fr: {
-      title: "Écrire le playbook",
-      place: "Sage Finance · Telangana, Inde",
+      title: "First real builds",
+      place: "DRK Group of Institutions · Hyderabad",
       story:
-        "Une année entière à piloter la stratégie commerciale et l’acquisition client : analyse de marché, segmentation, pipeline face aux KPI suivis. J’ai écrit le playbook inbound-to-close adopté par toute l’équipe, et une semaine à plus de 20 000 $ est devenue une promotion au marketing.",
+        "The year of going beyond theory. Building first full-stack web applications, exploring JavaScript, PHP and MySQL, and discovering the satisfaction of deploying something real that people actually use.",
       bridge:
-        "Ce playbook a été la première fois que je concevais un système au lieu de travailler dedans. Restait à apprendre à le faire vraiment.",
+        "Every project taught me that clean code matters less than code that solves real problems.",
     },
   },
   {
-    id: "france",
+    id: "iit",
     year: "2024",
-    title: "Starting over, in French",
-    place: "Montpellier Business School · France",
+    title: "Deep Learning at IIT",
+    place: "Indian Institute of Technology, Guwahati",
     story:
-      "August closed the India chapter. September opened an MSc in International Business at Montpellier Business School — new country, new language, and the formal training my instincts had been running without.",
-    bridge: "Business school handed me the vocabulary. The next year handed me the craft.",
+      "A summer at one of India's premier research institutions. Architected an offline AI virtual assistant using Deep Learning — trained a speech-to-text model on the LJ Speech Dataset, integrated Python-based system automation, and built something that worked entirely without an internet connection.",
+    bridge:
+      "IIT Guwahati showed me that research and engineering aren't separate things — they're the same curiosity applied at different altitudes.",
     fr: {
-      title: "Tout recommencer, en français",
-      place: "Montpellier Business School · France",
+      title: "Deep Learning at IIT",
+      place: "Indian Institute of Technology, Guwahati",
       story:
-        "Août a refermé le chapitre indien. Septembre a ouvert un MSc International Business à Montpellier Business School — nouveau pays, nouvelle langue, et la formation qui manquait à des intuitions déjà en marche.",
-      bridge: "L’école m’a donné le vocabulaire. L’année suivante m’a donné le métier.",
+        "A summer at one of India's premier research institutions. Architected an offline AI virtual assistant using Deep Learning — trained a speech-to-text model on the LJ Speech Dataset, integrated Python-based system automation.",
+      bridge:
+        "IIT Guwahati showed me that research and engineering aren't separate things — they're the same curiosity applied at different altitudes.",
     },
   },
   {
-    id: "three-rooms",
+    id: "hal",
     year: "2025",
-    title: "Three rooms, one question",
-    place: "Montpellier · Los Gatos (remote) · Paris",
+    title: "Industry validation at HAL",
+    place: "Hindustan Aeronautics Limited · Hyderabad",
     story:
-      "Three roles in one year. SEO and CRO at Site Web & Co — 35% organic growth, won by fixing templates rather than pages. Human-in-the-loop AI at Oigetit — teaching a misinformation engine to explain itself. Process analysis at V Raise in Paris — 12% efficiency across logistics workflows.",
+      "Hindustan Aeronautics Limited: an internship that demanded production-quality engineering. Built an automated LAN monitoring system in C# .NET with PowerShell, logging to Oracle, visualized on a real-time web dashboard. The system was adopted and validated in a live lab environment. Back at DRK, the Results Management System went live for 3,500+ students.",
     bridge:
-      "Measurement, trust and systems: three different rooms, all asking how you make something complex feel obvious. That question has a job title.",
+      "Writing software that secures an aerospace organization's network is a different kind of test — one where failure has real stakes.",
     fr: {
-      title: "Trois terrains, une seule question",
-      place: "Montpellier · Los Gatos (à distance) · Paris",
+      title: "Industry validation at HAL",
+      place: "Hindustan Aeronautics Limited · Hyderabad",
       story:
-        "Trois postes en un an. SEO et CRO chez Site Web & Co — +35 % de trafic organique, gagnés en corrigeant les gabarits plutôt que les pages. IA « human-in-the-loop » chez Oigetit — apprendre à un moteur anti-désinformation à s’expliquer. Analyse de processus chez V Raise à Paris — +12 % d’efficacité sur les flux logistiques.",
+        "Hindustan Aeronautics Limited: an internship that demanded production-quality engineering. Built an automated LAN monitoring system in C# .NET with PowerShell, logging to Oracle, visualized on a real-time web dashboard.",
       bridge:
-        "Mesure, confiance, systèmes : trois terrains différents, une même question — comment rendre le complexe évident ? Cette question a un intitulé de poste.",
+        "Writing software that secures an aerospace organization's network is a different kind of test — one where failure has real stakes.",
     },
   },
   {
-    id: "product",
-    year: "2026",
-    title: "The job it was heading toward",
-    place: "Sophia Antipolis, France",
+    id: "lead",
+    year: "2025–26",
+    title: "Leading at scale",
+    place: "DRK Group of Institutions · Hyderabad",
     story:
-      "March: first place at the UNBIAS hackathon with LockAI, a privacy-first offline AI assistant — strategy, UX and three working prototypes in one sprint. May: Product Designer at Heeding, designing the UX of a sustainable-fuel marketplace aimed at a billion tonnes of avoided CO₂.",
+      "Promoted to Lead Full Stack Developer at DRK. A suite of production applications serving 3,500+ students: the Results Management System live at drkresults.kesug.com, Faculty and Student Portal mobile apps built in Flutter, and a Multimodal AI System for Road Safety using YOLOv8, CBAM and ResNet-50 achieving superior detection of helmets, number plates and traffic violations.",
     bridge:
-      "Selling taught me customers. Analysis taught me systems. Design is where the two finally do the same job.",
+      "Selling solutions taught me what users want. Engineering them at scale taught me what systems need.",
     fr: {
-      title: "Le métier vers lequel tout allait",
-      place: "Sophia Antipolis, France",
+      title: "Leading at scale",
+      place: "DRK Group of Institutions · Hyderabad",
       story:
-        "Mars : première place au hackathon UNBIAS avec LockAI, un assistant IA hors-ligne axé confidentialité — stratégie, UX et trois prototypes fonctionnels en un sprint. Mai : Product Designer chez Heeding, l’UX d’une marketplace de carburants durables visant un milliard de tonnes de CO₂ évitées.",
+        "Promoted to Lead Full Stack Developer at DRK. A suite of production applications serving 3,500+ students: the Results Management System live, Faculty and Student Portal mobile apps in Flutter, and a Multimodal AI System for Road Safety.",
       bridge:
-        "La vente m’a appris les clients. L’analyse m’a appris les systèmes. Le design est l’endroit où les deux font enfin le même travail.",
+        "Selling solutions taught me what users want. Engineering them at scale taught me what systems need.",
+    },
+  },
+  {
+    id: "graduation",
+    year: "2026",
+    title: "The next chapter",
+    place: "Hyderabad, India",
+    story:
+      "Graduating with a B.Tech in CSE (AI & ML). Five projects deployed, two research internships at prestigious institutions, one aerospace industrial validation. The journey from first line of code to AI systems that run in production — and the next chapter just beginning.",
+    bridge:
+      "Every system I've built has made the next one more ambitious. The future is exactly where I intend to be.",
+    fr: {
+      title: "The next chapter",
+      place: "Hyderabad, India",
+      story:
+        "Graduating with a B.Tech in CSE (AI & ML). Five projects deployed, two research internships at prestigious institutions, one aerospace industrial validation.",
+      bridge:
+        "Every system I've built has made the next one more ambitious. The future is exactly where I intend to be.",
     },
   },
 ];

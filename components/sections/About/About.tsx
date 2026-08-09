@@ -3,45 +3,14 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger, prefersReducedMotion, EASE } from "@/lib/gsap";
 import Button from "@/components/ui/Button";
-import VelocityMarquee from "@/components/ui/VelocityMarquee";
 import styles from "./About.module.css";
 import { useLang } from "@/lib/i18n";
 
-const MARQUEE_ROWS = [
-  {
-    items: [
-      "Product Design",
-      "UX Design",
-      "UI Design",
-      "Design Systems",
-      "User Research",
-      "Interaction Design",
-      "Design Thinking",
-    ],
-    velocity: 34,
-  },
-  {
-    items: [
-      "Wireframing",
-      "Prototyping",
-      "Visual Design",
-      "Accessibility",
-      "Motion Design",
-      "Figma",
-      "Framer",
-      "AI-Assisted Design",
-      "Frontend Development",
-    ],
-    velocity: -28,
-    outline: true,
-  },
-];
-
 const METRICS = [
   { value: "1st", count: null, key: "about.m1" },
-  { value: "3+", count: 3, suffix: "+", key: "about.m2" },
-  { value: "$70K+", count: 70, prefix: "$", suffix: "K+", key: "about.m3" },
-  { value: "1B+", count: null, key: "about.m4" },
+  { value: "2+", count: 2, suffix: "+", key: "about.m2" },
+  { value: "3.5K+", count: 3500, suffix: "+", key: "about.m3" },
+  { value: "80%", count: 80, suffix: "%", key: "about.m4" },
 ];
 
 export default function About() {
@@ -80,9 +49,6 @@ export default function About() {
             gsap.utils.toArray<HTMLElement>("[data-metric-count]").forEach((numEl) => {
               const target = Number(numEl.dataset.metricCount);
               const obj = { v: 0 };
-              /* the markup ships the real number, so it is correct with no JS
-                 at all; the count-up rewinds to zero only at the moment it is
-                 actually about to run */
               numEl.textContent = "0";
               gsap.to(obj, {
                 v: target,
@@ -109,8 +75,6 @@ export default function About() {
 
   return (
     <section className={styles.about} id="about" ref={root}>
-      <VelocityMarquee rows={MARQUEE_ROWS} />
-
       <div className={styles.wrap}>
         <div className={styles.header}>
           <p className={styles.eyebrow}>
@@ -129,9 +93,6 @@ export default function About() {
                 {m.count !== null ? (
                   <>
                     {"prefix" in m && m.prefix}
-                    {/* ships the real number: with reduced motion (or no JS)
-                        the count-up never runs, and a hardcoded 0 here left
-                        those users reading "0+" and "$0K+" permanently */}
                     <span data-metric-count={m.count}>{m.count}</span>
                     <i>{m.suffix}</i>
                   </>

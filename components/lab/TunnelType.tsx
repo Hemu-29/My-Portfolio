@@ -62,7 +62,7 @@ type Props = {
   text?: string;
 };
 
-export default function TunnelType({ text = "GIREESH" }: Props) {
+export default function TunnelType({ text = "HEMANTH" }: Props) {
   const frameRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [webglOk, setWebglOk] = useState(true);

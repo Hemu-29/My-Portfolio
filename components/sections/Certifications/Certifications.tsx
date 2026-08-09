@@ -245,7 +245,6 @@ export default function Certifications() {
                       <img
                         src={c.logo.src}
                         alt={c.issuer ?? ""}
-                        style={{ aspectRatio: c.logo.aspect }}
                       />
                     </span>
                   ) : null}
@@ -314,7 +313,7 @@ export default function Certifications() {
 
       <div className={styles.foot}>
         <span className={styles.brandFoot}>
-          <b>06</b> Gireesh
+          <b>06</b> Hemanth
         </span>
         <span className={styles.count}>
           01 / {String(PANELS.length).padStart(2, "0")}

@@ -37,7 +37,7 @@ const CHAPTERS: Chapter[] = [
     label: "Introduction",
     title: (
       <>
-        I&rsquo;m Gireesh — I design products people{" "}
+        I&rsquo;m Hemanth — I build AI &amp; full-stack systems people{" "}
         <em className={styles.serif}>trust.</em>
       </>
     ),
