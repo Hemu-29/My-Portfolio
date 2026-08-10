@@ -46,6 +46,11 @@ export const metadata: Metadata = {
     title: "Hemanth Ande | AI & Full Stack Developer",
     description: DESCRIPTION,
   },
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 const personJsonLd = {
