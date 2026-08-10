@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Instrument_Serif, Caveat } from "next/font/google";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 import { LanguageProvider } from "@/lib/i18n";
-import { SITE_URL, PERSON } from "@/lib/site";
+import { SITE_URL, PERSON, assetPath } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
   },
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: assetPath("/favicon.png"),
+    shortcut: assetPath("/favicon.png"),
+    apple: assetPath("/favicon.png"),
   },
 };
 
