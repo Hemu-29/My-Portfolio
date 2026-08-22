@@ -20,6 +20,17 @@
   height: 100%;
 }
 
+/* work scene holds a full vertical list of 5 projects — allow it to expand to its full height */
+.hold[data-scene="work"] {
+  position: relative;
+  height: auto;
+  min-height: 100svh;
+  overflow: visible;
+}
+.hold[data-scene="work"] > * {
+  height: auto;
+}
+
 /* pure scroll distance for a scene's interior — paints nothing */
 .runway {
   position: relative;

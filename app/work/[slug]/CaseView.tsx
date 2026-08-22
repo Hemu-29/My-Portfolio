@@ -1,13 +1,5 @@
 "use client";
 
-/* Client half of the case study. The route stays a server component so
-   generateStaticParams / generateMetadata keep working; everything the
-   reader sees lives here, where the language context is available.
-
-   The English study is the base record and the French one is layered over
-   it, so a partially translated study still renders — untranslated fields
-   fall through to English instead of disappearing. */
-
 import Link from "next/link";
 import { PROJECTS } from "@/content/projects";
 import LanguageToggle from "@/components/layout/LanguageToggle";
@@ -19,7 +11,7 @@ export default function CaseView({ slug }: { slug: string }) {
   const { t, lang } = useLang();
 
   const project = PROJECTS.find((p) => p.slug === slug);
-  if (!project) return null; /* the server component already called notFound() */
+  if (!project) return null;
 
   const fr = lang === "fr" ? project.fr : undefined;
   const study = { ...project.study, ...(fr?.study ?? {}) };
@@ -30,77 +22,95 @@ export default function CaseView({ slug }: { slug: string }) {
 
   return (
     <main className={styles.page}>
-      <div className={styles.bar}>
-        <Link href="/#work" className={styles.back}>
-          {t("case.back")}
+      {/* Glass Top Navigation Bar */}
+      <header className={styles.bar}>
+        <Link href="/#work" className={styles.backBtn}>
+          <span className={styles.backArrow}>←</span>
+          <span>{t("case.back")}</span>
         </Link>
-        {/* the toggle is repeated here because Nav only exists on the home
-            page — a shared case-study link is often a visitor's first screen */}
+
         <div className={styles.barRight}>
           <Link href="/" className={styles.logo}>
             HEMANTH<i>.</i>
           </Link>
           <LanguageToggle />
         </div>
-      </div>
+      </header>
 
-      <div className={styles.wrap}>
-        {/* ---- hero ---- */}
+      <article className={styles.wrap}>
+        {/* Hero Section */}
         <header className={styles.hero}>
-          <p className={styles.kicker}>
-            {t("case.kicker")} · {project.year}
-            {project.award ? ` · ${project.award}` : ""}
-          </p>
+          <div className={styles.kickerRow}>
+            <span className={styles.kicker}>{t("case.kicker")}</span>
+            <span className={styles.dotDivider}>·</span>
+            <span className={styles.yearBadge}>{project.year}</span>
+            {project.award && (
+              <>
+                <span className={styles.dotDivider}>·</span>
+                <span className={styles.awardBadge}>{project.award}</span>
+              </>
+            )}
+          </div>
+
           <h1 className={styles.title}>{L(lang, project, "title")}</h1>
           <p className={styles.oneLiner}>{L(lang, project, "oneLiner")}</p>
-          <div className={styles.meta}>
-            <div>
-              <b>{t("case.role")}</b>
-              <span>{study.role}</span>
+
+          {/* Quick Metadata Dashboard Grid */}
+          <div className={styles.metaGrid}>
+            <div className={styles.metaCard}>
+              <span className={styles.metaLabel}>{t("case.role")}</span>
+              <span className={styles.metaValue}>{study.role}</span>
             </div>
-            <div>
-              <b>{t("case.timeline")}</b>
-              <span>{study.timeline}</span>
+
+            <div className={styles.metaCard}>
+              <span className={styles.metaLabel}>{t("case.timeline")}</span>
+              <span className={styles.metaValue}>{study.timeline}</span>
             </div>
-            <div>
-              <b>{t("case.focus")}</b>
-              <span>{tags.join(" · ")}</span>
-            </div>
-            {/* verified official destinations only — never a guessed URL */}
-            {project.site && (
-              <div>
-                <b>{t("case.site")}</b>
-                <span>
-                  <a
-                    className={styles.siteLink}
-                    href={project.site.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {project.site.label} ↗
-                  </a>
-                </span>
+
+            <div className={styles.metaCard}>
+              <span className={styles.metaLabel}>{t("case.focus")}</span>
+              <div className={styles.tagWrap}>
+                {tags.map((tag) => (
+                  <span key={tag} className={styles.miniTag}>
+                    {tag}
+                  </span>
+                ))}
               </div>
-            )}
-            {project.repo && (
-              <div>
-                <b>{t("case.repo")}</b>
-                <span>
-                  <a
-                    className={styles.siteLink}
-                    href={project.repo}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    GitHub ↗
-                  </a>
-                </span>
+            </div>
+
+            {(project.site || project.repo) && (
+              <div className={styles.metaCard}>
+                <span className={styles.metaLabel}>Links & Code</span>
+                <div className={styles.linkGroup}>
+                  {project.site && (
+                    <a
+                      className={styles.siteLink}
+                      href={project.site.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {project.site.label} ↗
+                    </a>
+                  )}
+                  {project.repo && (
+                    <a
+                      className={styles.repoLink}
+                      href={project.repo}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      GitHub Repo ↗
+                    </a>
+                  )}
+                </div>
               </div>
             )}
           </div>
+
+          {/* Visual Showcase Cover */}
           {project.cover ? (
             <div
-              className={styles.cover}
+              className={styles.coverFrame}
               style={{
                 background: project.cover.bg,
                 color: project.cover.ink === "light" ? "#fff" : "var(--ink)",
@@ -127,35 +137,43 @@ export default function CaseView({ slug }: { slug: string }) {
               )}
             </div>
           ) : (
-            <div className={styles.cover}>
-              ▢&nbsp;&nbsp;{project.coverLabel} — {t("case.cover")}
+            <div className={styles.coverFrame}>
+              ▢ {project.coverLabel} — {t("case.cover")}
             </div>
           )}
         </header>
 
-        {/* ---- context ---- */}
+        {/* Section 01: Context */}
         <section className={styles.section}>
-          <p className={styles.secLabel}>{t("case.context")}</p>
-          <p className={styles.body}>{study.context}</p>
+          <div className={styles.secHeader}>
+            <span className={styles.secNum}>01</span>
+            <h2 className={styles.secTitle}>{t("case.context")}</h2>
+          </div>
+          <p className={styles.bodyText}>{study.context}</p>
         </section>
 
-        {/* ---- problem ---- */}
+        {/* Section 02: Problem Statement */}
         <section className={styles.section}>
-          <p className={styles.secLabel}>{t("case.problem")}</p>
-          <p className={styles.problem}>{study.problem}</p>
+          <div className={styles.secHeader}>
+            <span className={styles.secNum}>02</span>
+            <h2 className={styles.secTitle}>{t("case.problem")}</h2>
+          </div>
+          <div className={styles.problemBox}>
+            <p className={styles.problemText}>{study.problem}</p>
+          </div>
         </section>
 
-        {/* ---- process ---- */}
+        {/* Section 03: Process & Architecture */}
         <section className={styles.section}>
-          <p className={styles.secLabel}>{t("case.process")}</p>
-          <div className={styles.steps}>
-            {/* index keys on purpose: these lists are static and never
-                reorder, so switching language re-labels rows in place
-                instead of remounting them */}
+          <div className={styles.secHeader}>
+            <span className={styles.secNum}>03</span>
+            <h2 className={styles.secTitle}>{t("case.process")}</h2>
+          </div>
+          <div className={styles.stepsGrid}>
             {study.process.map((s, i) => (
-              <div className={styles.step} key={i}>
-                <span className={styles.stepN}>0{i + 1}</span>
-                <div>
+              <div className={styles.stepCard} key={i}>
+                <span className={styles.stepBadge}>0{i + 1}</span>
+                <div className={styles.stepContent}>
                   <h3>{s.title}</h3>
                   <p>{s.body}</p>
                 </div>
@@ -164,51 +182,68 @@ export default function CaseView({ slug }: { slug: string }) {
           </div>
         </section>
 
-        {/* ---- decisions ---- */}
+        {/* Section 04: Key Engineering Decisions */}
         <section className={styles.section}>
-          <p className={styles.secLabel}>{t("case.decisions")}</p>
-          <div className={styles.decisions}>
+          <div className={styles.secHeader}>
+            <span className={styles.secNum}>04</span>
+            <h2 className={styles.secTitle}>{t("case.decisions")}</h2>
+          </div>
+          <div className={styles.decisionsList}>
             {study.decisions.map((d, i) => (
-              <div className={styles.decision} key={i}>
-                <h3>{d.title}</h3>
-                <p>{d.why}</p>
+              <div className={styles.decisionCard} key={i}>
+                <div className={styles.decisionHeader}>
+                  <span className={styles.decisionTag}>Decision #{i + 1}</span>
+                  <h3>{d.title}</h3>
+                </div>
+                <p className={styles.decisionWhy}>
+                  <strong>Rationale:</strong> {d.why}
+                </p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ---- outcome ---- */}
+        {/* Section 05: Measurable Outcomes */}
         <section className={styles.section}>
-          <p className={styles.secLabel}>{t("case.outcome")}</p>
-          <div className={styles.outcomes}>
+          <div className={styles.secHeader}>
+            <span className={styles.secNum}>05</span>
+            <h2 className={styles.secTitle}>{t("case.outcome")}</h2>
+          </div>
+          <div className={styles.outcomesGrid}>
             {study.outcomes.map((o, i) => (
-              <p className={styles.outcome} key={i}>
-                <span>✦</span> {o}
-              </p>
+              <div className={styles.outcomeCard} key={i}>
+                <span className={styles.starIcon}>✦</span>
+                <p>{o}</p>
+              </div>
             ))}
           </div>
-          {study.note && <p className={styles.note}>{study.note}</p>}
+          {study.note && <div className={styles.noteBox}>{study.note}</div>}
         </section>
 
-        {/* ---- reflection ---- */}
+        {/* Section 06: Reflection */}
         <section className={styles.section}>
-          <p className={styles.secLabel}>{t("case.reflection")}</p>
-          <p className={styles.reflection}>&ldquo;{study.reflection}&rdquo;</p>
+          <div className={styles.secHeader}>
+            <span className={styles.secNum}>06</span>
+            <h2 className={styles.secTitle}>{t("case.reflection")}</h2>
+          </div>
+          <blockquote className={styles.reflectionQuote}>
+            &ldquo;{study.reflection}&rdquo;
+          </blockquote>
         </section>
 
-        {/* ---- next ---- */}
+        {/* Next Project Footer Bar */}
         <nav className={styles.footNav}>
-          <Link href="/#work" className={styles.back}>
+          <Link href="/#work" className={styles.backAllBtn}>
             {t("case.all")}
           </Link>
-          <Link href={`/work/${next.slug}`} className={styles.nextLink}>
-            <small>{t("case.next")}</small>
-            <span>
+          <Link href={`/work/${next.slug}`} className={styles.nextCard}>
+            <span className={styles.nextSub}>{t("case.next")}</span>
+            <span className={styles.nextTitle}>
               {L(lang, next, "title")} <i>→</i>
             </span>
           </Link>
         </nav>
-      </div>
+      </article>
     </main>
   );
 }

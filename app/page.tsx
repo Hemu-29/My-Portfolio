@@ -30,7 +30,7 @@ export default function Home() {
           <DesignStack />
         </Scene>
 
-        <Scene order={5} runway={4.5} id="work">
+        <Scene order={5} runway={0} id="work">
           <Work />
         </Scene>
 
