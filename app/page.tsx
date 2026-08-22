@@ -34,7 +34,7 @@ export default function Home() {
           <Work />
         </Scene>
 
-        <Scene order={6} runway={4.4} id="experience">
+        <Scene order={6} runway={3} id="experience">
           <Experience />
         </Scene>
 
